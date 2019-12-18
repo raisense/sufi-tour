@@ -20,11 +20,23 @@
           >
             <v-row class="px-3">
               <v-col xs="12" sm="6" md="5">
-                <v-skeleton-loader class max-width="100%" type="image"></v-skeleton-loader>
+                <v-skeleton-loader
+                  class
+                  max-width="100%"
+                  type="image"
+                ></v-skeleton-loader>
               </v-col>
               <v-col xs="12" sm="6" md="7">
-                <v-skeleton-loader class max-width="100%" type="article"></v-skeleton-loader>
-                <v-skeleton-loader class max-width="100%" type="actions"></v-skeleton-loader>
+                <v-skeleton-loader
+                  class
+                  max-width="100%"
+                  type="article"
+                ></v-skeleton-loader>
+                <v-skeleton-loader
+                  class
+                  max-width="100%"
+                  type="actions"
+                ></v-skeleton-loader>
               </v-col>
             </v-row>
           </v-sheet>
@@ -36,7 +48,9 @@
               <div class="tour-name">About {{ name }}</div>
               <div class="tour-desc">{{ desc }}</div>
             </div>
-            <button class="custom custom-success" @click.stop="dialog = true">Register Now</button>
+            <button class="custom custom-success" @click.stop="dialog = true">
+              Register Now
+            </button>
           </div>
         </v-container>
       </div>
@@ -88,13 +102,17 @@
                       <div class="tour-single-title d-flex">
                         <div>
                           <div class="day-label">day:</div>
-                          <div class="day-number">0{{ item.primary.day_number }}</div>
+                          <div class="day-number">
+                            0{{ item.primary.day_number }}
+                          </div>
                         </div>
                         <h3>{{ item.primary.destination_name[0].text }}</h3>
                       </div>
                       <div class="scroll-area">
                         <smooth-scrollbar>
-                          <div class="tour-single-desc">{{ item.primary.description[0].text }}</div>
+                          <div class="tour-single-desc">
+                            {{ item.primary.description[0].text }}
+                          </div>
                         </smooth-scrollbar>
                       </div>
                     </v-col>
@@ -103,7 +121,9 @@
                 <div class="swiper-button-prev" slot="button-prev"></div>
                 <div class="swiper-button-next" slot="button-next"></div>
               </swiper>
-              <h4 class="included-services-title text-center">included in price:</h4>
+              <h4 class="included-services-title text-center">
+                included in price:
+              </h4>
               <div class="included-services d-flex align-start justify-center">
                 <div class="included-item">
                   <div class="included-item__img">
@@ -140,20 +160,45 @@
         <v-container>
           <h1>{{ name }}</h1>
           <p>Using this form we will proceed your registration further</p>
-          <v-row>
-            <v-col cols="12">
-              <input type="text" name placeholder="your name" required />
-            </v-col>
-            <v-col cols="12">
-              <input type="email" name placeholder="your mail address" required />
-            </v-col>
-            <v-col cols="12">
-              <input type="text" name placeholder="your phone number" required />
-            </v-col>
-            <v-col cols="12">
-              <button class="custom custom-success">send</button>
-            </v-col>
-          </v-row>
+          <form action="https://formspree.io/xknondeb" method="post">
+            <v-row>
+              <input
+                type="text"
+                style="display: none"
+                name="tour-name"
+                :value="name"
+              />
+              <v-col cols="12">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="your name"
+                  required
+                />
+              </v-col>
+              <v-col cols="12">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="your mail address"
+                  required
+                />
+              </v-col>
+              <v-col cols="12">
+                <input
+                  type="text"
+                  name="phone-number"
+                  placeholder="your phone number"
+                  required
+                />
+              </v-col>
+              <v-col cols="12">
+                <button class="custom custom-success" type="submit">
+                  send
+                </button>
+              </v-col>
+            </v-row>
+          </form>
         </v-container>
       </v-form>
     </v-dialog>
@@ -203,7 +248,7 @@ export default {
       this.loading = true;
       this.$prismic.client
         .query(this.$prismic.Predicates.at("document.id", id), { lang: "*" })
-        .then(response => {
+        .then((response) => {
           const data = response.results[0].data;
 
           this.name = data.name[0].text;
@@ -305,7 +350,7 @@ input {
   }
 
   .tour-img {
-    width: 50%;
+    // width: 50%;
 
     img {
       width: 100%;
@@ -410,7 +455,7 @@ input {
 
     .tour-single-title {
       font-weight: bold;
-      font-size: 32px;
+      font-size: 42px;
 
       h3 {
         padding-left: 12px;

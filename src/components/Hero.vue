@@ -3,7 +3,8 @@
   <v-parallax class="hero" src="../assets/hero-img.png">
     <div class="hero-content">
       <h1 class="hero-title">What you seek is seeking you.</h1>
-      <h1 class="hero-subtitle">Group travels across uzbekistan</h1>
+      <h5 class="hero-subtitle">Group travels across uzbekistan</h5>
+      <h5 class="hero-subtitle">{{ $t("greeting") }}</h5>
       <div class="counters mt-12 d-flex justify-space-between">
         <div class="counter-item text-center">
           <div class="counter-item__number">1327+</div>

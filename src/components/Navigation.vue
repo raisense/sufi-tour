@@ -3,7 +3,7 @@
     <v-app-bar app color="transparent" absolute class="elevation-0" dark>
       <v-container class="py-0">
         <div class="d-flex">
-          <router-link to="/">
+          <router-link :to="`/`">
             <v-img
               alt="Vuetify Logo"
               class="shrink mr-2"
@@ -15,32 +15,57 @@
           </router-link>
           <v-spacer></v-spacer>
           <v-toolbar-items class="hide-on-mobile">
-            <router-link class="elevation-0" to="#about" v-scroll-to="'#about'" text>about</router-link>
-            <router-link class="elevation-0" to="/tours" text>tours</router-link>
-            <router-link class="elevation-0" to="#feedback" v-scroll-to="'#feedback'" text>feedbacks</router-link>
+            <router-link
+              class="elevation-0"
+              :to="this.$route == '/' ? '#about' : '/'"
+              v-scroll-to="'#about'"
+              text
+              >about</router-link
+            >
+            <router-link class="elevation-0" :to="`/tours`" text
+              >tours</router-link
+            >
+            <router-link
+              class="elevation-0"
+              :to="this.$route == '/' ? '#feedback' : '/'"
+              v-scroll-to="'#feedback'"
+              text
+              >feedbacks</router-link
+            >
             <router-link
               class="elevation-0"
               :to="this.$route == '/' ? '#contact-us' : '/'"
               v-scroll-to="'#contact-us'"
               text
-            >contact us</router-link>
+              >contact us</router-link
+            >
           </v-toolbar-items>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-menu bottom left>
+            <!-- <v-menu bottom left>
               <template v-slot:activator="{ on }">
                 <v-btn dark icon v-on="on">En</v-btn>
               </template>
 
               <v-list>
-                <v-list-item v-for="(item, i) in languages" :key="i" @click.stop>
+                <v-list-item
+                  v-for="(item, i) in languages"
+                  :key="i"
+                  @click.stop
+                >
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
                 </v-list-item>
               </v-list>
-            </v-menu>
-            <a href="tel:+998 90 123 45 67" class="hide-on-mobile">+998 90 123 45 67</a>
+            </v-menu> -->
+            <LanguagePicker></LanguagePicker>
+            <a href="tel:+998 90 123 45 67" class="hide-on-mobile"
+              >+998 90 123 45 67</a
+            >
 
-            <v-app-bar-nav-icon class="show-on-mobile" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon
+              class="show-on-mobile"
+              @click.stop="drawer = !drawer"
+            ></v-app-bar-nav-icon>
           </v-toolbar-items>
         </div>
       </v-container>
@@ -56,7 +81,9 @@
         <v-list-item link>
           <v-list-item-content>
             <v-list-item-title>
-              <router-link class="elevation-0" to="/about" text>about</router-link>
+              <router-link class="elevation-0" to="/about" text
+                >about</router-link
+              >
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -80,18 +107,22 @@
     }
   }
   a.router-link-active:before {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    width: 20px;
-    height: 1.2px;
-    background-color: #fff;
+    content: none;
+    // position: absolute;
+    // bottom: -5px;
+    // width: 20px;
+    // height: 1.2px;
+    // background-color: #fff;
   }
 }
 </style>
 
 <script>
+import LanguagePicker from "./LanguagePicker";
 export default {
+  components: {
+    LanguagePicker
+  },
   data() {
     return {
       languages: [

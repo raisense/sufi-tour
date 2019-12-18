@@ -56,47 +56,80 @@
         >
           <v-row class="px-3">
             <v-col xs="12" sm="6" md="5">
-              <v-skeleton-loader class max-width="100%" type="image"></v-skeleton-loader>
+              <v-skeleton-loader
+                class
+                max-width="100%"
+                type="image"
+              ></v-skeleton-loader>
             </v-col>
             <v-col xs="12" sm="6" md="7">
-              <v-skeleton-loader class max-width="100%" type="article"></v-skeleton-loader>
-              <v-skeleton-loader class max-width="100%" type="actions"></v-skeleton-loader>
+              <v-skeleton-loader
+                class
+                max-width="100%"
+                type="article"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                class
+                max-width="100%"
+                type="actions"
+              ></v-skeleton-loader>
             </v-col>
           </v-row>
           <v-row class="px-3">
             <v-col xs="12" sm="6" md="5">
-              <v-skeleton-loader class max-width="100%" type="image"></v-skeleton-loader>
+              <v-skeleton-loader
+                class
+                max-width="100%"
+                type="image"
+              ></v-skeleton-loader>
             </v-col>
             <v-col xs="12" sm="6" md="7">
-              <v-skeleton-loader class max-width="100%" type="article"></v-skeleton-loader>
-              <v-skeleton-loader class max-width="100%" type="actions"></v-skeleton-loader>
+              <v-skeleton-loader
+                class
+                max-width="100%"
+                type="article"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                class
+                max-width="100%"
+                type="actions"
+              ></v-skeleton-loader>
             </v-col>
           </v-row>
         </v-sheet>
-        <div class="tour-item d-flex flex-sm-row" v-for="(item, i) in tours" :key="i">
+        <div
+          class="tour-item d-flex flex-sm-row"
+          v-for="(item, i) in tours"
+          :key="i"
+        >
           <div class="tour-img">
             <img :src="item.data.image.url" alt />
           </div>
           <div class="tour-details pl-8">
-            <div class="tour-date">{{getDifference(item.data.start_date, item.data.end_date)}}</div>
-            <div class="tour-name">{{item.data.name[0].text}}</div>
-            <div class="tour-desc">{{item.data.description[0].text | truncate(194)}}</div>
+            <div class="tour-date">
+              {{ getDifference(item.data.start_date, item.data.end_date) }}
+            </div>
+            <div class="tour-name">{{ item.data.name[0].text }}</div>
+            <div class="tour-desc">
+              {{ item.data.description[0].text | truncate(194) }}
+            </div>
             <div class="tour-footer">
               <v-row>
                 <v-col cols="3">
                   <p class="duration-label">duration:</p>
-                  <p
-                    class="duration-text"
-                  >{{getDuration(item.data.start_date, item.data.end_date)}} days</p>
+                  <p class="duration-text">
+                    {{ getDuration(item.data.start_date, item.data.end_date) }}
+                    days
+                  </p>
                 </v-col>
                 <v-col cols="3">
                   <p class="price-label">price:</p>
-                  <p class="price-text">from ${{item.data.price}}</p>
+                  <p class="price-text">from ${{ item.data.price }}</p>
                 </v-col>
               </v-row>
             </div>
           </div>
-          <router-link :to="{ path: '/tours/' + item.id}">
+          <router-link :to="`/tours/${item.id}`">
             <button class="custom custom-success">details</button>
           </router-link>
         </div>
@@ -125,7 +158,7 @@ export default {
       this.loading = true;
       this.$prismic.client
         .query(this.$prismic.Predicates.at("document.type", "tour"))
-        .then(response => {
+        .then((response) => {
           this.tours = JSON.parse(JSON.stringify(response.results));
           this.loading = false;
         });

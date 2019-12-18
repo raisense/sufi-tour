@@ -6,6 +6,8 @@ import vuetify from "./plugins/vuetify";
 import SmoothScrollbar from "vue-smooth-scrollbar";
 import PrismicVue from "prismic-vue";
 import linkResolver from "./link-resolver";
+import { i18n } from "./plugins/i18n.js";
+
 var VueScrollTo = require("vue-scrollto");
 
 import "./global.scss";
@@ -45,6 +47,6 @@ new Vue({
   router,
   store,
   vuetify,
-
+  i18n,
   render: (h) => h(App)
 }).$mount("#app");
