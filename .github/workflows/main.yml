@@ -18,9 +18,9 @@ jobs:
           node-version: 10.x
       - run: npm install
       - run: npm run build
-      - run: cp CNAME public/
+      - run: cp CNAME dist/
       - name: GitHub Pages Deploy
         uses: maxheld83/ghpages@v0.2.1
         env:
-          BUILD_DIR: public/
+          BUILD_DIR: dist/
           GH_PAT: ${{ secrets.GH_PAT }}
