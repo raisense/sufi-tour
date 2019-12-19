@@ -6,7 +6,7 @@
           <v-col class="text-center" cols="12">
             <h1 class="display-1 font-weight-bold mb-4">{{ name }}</h1>
 
-            <div class="tour-date">DECEMBER 12 - 24</div>
+            <div class="tour-date">{{getDifference(start, end)}}</div>
           </v-col>
         </v-row>
       </v-parallax>
@@ -20,23 +20,11 @@
           >
             <v-row class="px-3">
               <v-col xs="12" sm="6" md="5">
-                <v-skeleton-loader
-                  class
-                  max-width="100%"
-                  type="image"
-                ></v-skeleton-loader>
+                <v-skeleton-loader class max-width="100%" type="image"></v-skeleton-loader>
               </v-col>
               <v-col xs="12" sm="6" md="7">
-                <v-skeleton-loader
-                  class
-                  max-width="100%"
-                  type="article"
-                ></v-skeleton-loader>
-                <v-skeleton-loader
-                  class
-                  max-width="100%"
-                  type="actions"
-                ></v-skeleton-loader>
+                <v-skeleton-loader class max-width="100%" type="article"></v-skeleton-loader>
+                <v-skeleton-loader class max-width="100%" type="actions"></v-skeleton-loader>
               </v-col>
             </v-row>
           </v-sheet>
@@ -48,9 +36,10 @@
               <div class="tour-name">About {{ name }}</div>
               <div class="tour-desc">{{ desc }}</div>
             </div>
-            <button class="custom custom-success" @click.stop="dialog = true">
-              Register Now
-            </button>
+            <button
+              class="custom custom-success"
+              @click.stop="dialog = true"
+            >{{$t("tour_item.btn")}}</button>
           </div>
         </v-container>
       </div>
@@ -59,33 +48,33 @@
           <div class="tour-header">
             <v-row>
               <v-col>
-                <strong>IN GROUP:</strong>
-                <span>{{ people }} people</span>
+                <strong>{{$t("tour_item.header.ingroup")}}:</strong>
+                <span>{{$tc("tour_item.header.people", people)}}</span>
               </v-col>
               <v-col>
-                <strong>PRICE:</strong>
+                <strong>{{$t("tour_item.header.price")}}:</strong>
                 <span>$ {{ price }}</span>
               </v-col>
               <v-col>
-                <strong>duration:</strong>
-                <span>7 days</span>
+                <strong>{{$t("tour_item.header.duration")}}:</strong>
+                <span>{{$tc("tour_item.header.days", getDuration(start, end))}}</span>
               </v-col>
               <v-col>
-                <strong>distance:</strong>
+                <strong>{{$t("tour_item.header.duration")}}:</strong>
                 <span>{{ distance }} KM</span>
               </v-col>
             </v-row>
           </div>
           <div class="tour-big-content">
-            <h1 class="text-center">Roadmap</h1>
-            <div class="tour-date text-center">DECEMBER 12 - 24</div>
+            <h1 class="text-center">{{$t("tour_item.header.roadmap")}}</h1>
+            <div class="tour-date text-center">{{getDifference(start, end)}}</div>
             <div class="d-flex justify-space-between">
               <div class="arrival">
-                <strong>arrival:</strong>
+                <strong>{{$t("tour_item.header.arrival")}}:</strong>
                 <span>Tashkent</span>
               </div>
               <div class="departure">
-                <strong>departure:</strong>
+                <strong>{{$t("tour_item.header.departure")}}:</strong>
                 <span>Khiva</span>
               </div>
             </div>
@@ -101,18 +90,14 @@
                     <v-col>
                       <div class="tour-single-title d-flex">
                         <div>
-                          <div class="day-label">day:</div>
-                          <div class="day-number">
-                            0{{ item.primary.day_number }}
-                          </div>
+                          <div class="day-label">{{$t("tour_item.header.day")}}:</div>
+                          <div class="day-number">0{{ item.primary.day_number }}</div>
                         </div>
                         <h3>{{ item.primary.destination_name[0].text }}</h3>
                       </div>
                       <div class="scroll-area">
                         <smooth-scrollbar>
-                          <div class="tour-single-desc">
-                            {{ item.primary.description[0].text }}
-                          </div>
+                          <div class="tour-single-desc">{{ item.primary.description[0].text }}</div>
                         </smooth-scrollbar>
                       </div>
                     </v-col>
@@ -121,33 +106,35 @@
                 <div class="swiper-button-prev" slot="button-prev"></div>
                 <div class="swiper-button-next" slot="button-next"></div>
               </swiper>
-              <h4 class="included-services-title text-center">
-                included in price:
-              </h4>
+              <h4
+                class="included-services-title text-center"
+              >{{$t("tour_item.header.included.title")}}:</h4>
               <div class="included-services d-flex align-start justify-center">
                 <div class="included-item">
                   <div class="included-item__img">
                     <img src="../assets/icons/hotel-blue.svg" alt />
                   </div>
-                  <div class="included-item__desc">Hotels</div>
+                  <div class="included-item__desc">{{$t("tour_item.header.included.hotels")}}</div>
                 </div>
                 <div class="included-item">
                   <div class="included-item__img">
                     <img src="../assets/icons/flight-blue.svg" alt />
                   </div>
-                  <div class="included-item__desc">internal flights</div>
+                  <div class="included-item__desc">{{$t("tour_item.header.included.flight")}}</div>
                 </div>
                 <div class="included-item">
                   <div class="included-item__img">
                     <img src="../assets/icons/food-blue.svg" alt />
                   </div>
-                  <div class="included-item__desc">Food</div>
+                  <div class="included-item__desc">{{$t("tour_item.header.included.food")}}</div>
                 </div>
                 <div class="included-item">
                   <div class="included-item__img">
                     <img src="../assets/icons/transport-blue.svg" alt />
                   </div>
-                  <div class="included-item__desc">transportation</div>
+                  <div
+                    class="included-item__desc"
+                  >{{$t("tour_item.header.included.transportation")}}</div>
                 </div>
               </div>
             </div>
@@ -162,40 +149,18 @@
           <p>Using this form we will proceed your registration further</p>
           <form action="https://formspree.io/xknondeb" method="post">
             <v-row>
-              <input
-                type="text"
-                style="display: none"
-                name="tour-name"
-                :value="name"
-              />
+              <input type="text" style="display: none" name="tour-name" :value="name" />
               <v-col cols="12">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="your name"
-                  required
-                />
+                <input type="text" name="name" placeholder="your name" required />
               </v-col>
               <v-col cols="12">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="your mail address"
-                  required
-                />
+                <input type="email" name="email" placeholder="your mail address" required />
               </v-col>
               <v-col cols="12">
-                <input
-                  type="text"
-                  name="phone-number"
-                  placeholder="your phone number"
-                  required
-                />
+                <input type="text" name="phone-number" placeholder="your phone number" required />
               </v-col>
               <v-col cols="12">
-                <button class="custom custom-success" type="submit">
-                  send
-                </button>
+                <button class="custom custom-success" type="submit">send</button>
               </v-col>
             </v-row>
           </form>
@@ -215,6 +180,13 @@ export default {
     swiper,
     swiperSlide
   },
+  computed: {
+    currentLang() {
+      if (this.$store.state.language.language == "en") {
+        return "en-us";
+      } else return this.$store.state.language.language;
+    }
+  },
   data() {
     return {
       loading: false,
@@ -230,6 +202,7 @@ export default {
       end: null,
       color: null,
       slices: [],
+      alternativeLang: [],
       swiperOption: {
         slidesPerView: 1,
         spaceBetween: 30,
@@ -243,12 +216,14 @@ export default {
   },
 
   methods: {
-    getTour() {
-      let id = this.$route.params.id;
+    getTour(tour_id) {
+      let id = tour_id || this.$route.params.id;
       this.loading = true;
       this.$prismic.client
-        .query(this.$prismic.Predicates.at("document.id", id), { lang: "*" })
-        .then((response) => {
+        .query(this.$prismic.Predicates.at("document.id", id), {
+          lang: "*"
+        })
+        .then(response => {
           const data = response.results[0].data;
 
           this.name = data.name[0].text;
@@ -261,8 +236,38 @@ export default {
           this.price = data.price;
           this.color = data.tour_color;
           this.slices = data.body;
+          this.alternativeLang = response.results[0].alternate_languages;
+          console.log(this.alternativeLang);
         });
+
       this.loading = false;
+    },
+    getDuration(start, end) {
+      const startDate = new Date(start).getTime(),
+        endDate = new Date(end).getTime(),
+        difference = (endDate - startDate) / (1000 * 3600 * 24);
+      return difference;
+    },
+    getDifference(start, end) {
+      const startMonth = new Date(start).getMonth();
+      const startYear = new Date(start).getYear();
+      const startDay = new Date(start).getDate();
+      const endMonth = new Date(end).getMonth();
+      const endYear = new Date(end).getYear();
+      const endDay = new Date(end).getDate();
+
+      if (startYear == endYear) {
+        return `${startMonth}/${startDay} - ${endMonth}/${endDay}`;
+      } else return start + " - " + end;
+    }
+  },
+  watch: {
+    currentLang(newValue) {
+      this.alternativeLang.map(el => {
+        if (el.lang == newValue) {
+          this.getTour(el.id);
+        }
+      });
     }
   },
 

@@ -53,13 +53,27 @@ export default {
       questions: null
     };
   },
+  computed: {
+    currentLang() {
+      if (this.$store.state.language.language == "en") {
+        return "en-us";
+      } else return this.$store.state.language.language;
+    }
+  },
   methods: {
     getFaq() {
       this.$prismic.client
-        .query(this.$prismic.Predicates.at("document.type", "faq"))
+        .query(this.$prismic.Predicates.at("document.type", "faq"), {
+          lang: this.currentLang
+        })
         .then(response => {
           this.questions = response.results;
         });
+    }
+  },
+  watch: {
+    currentLang(newValue) {
+      this.getFaq();
     }
   },
 

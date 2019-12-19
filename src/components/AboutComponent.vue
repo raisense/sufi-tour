@@ -1,33 +1,26 @@
 <template>
   <v-container id="about">
     <section class="about-list full-section py-12">
-      <div class="section-header d-flex justify-space-between mb-12">
-        <h3 class="section-title">: about</h3>
+      <div class="section-header d-flex justify-space-between mb-n8">
+        <h3 class="section-title">: {{$t("navigation.about")}}</h3>
       </div>
 
-      <div class="about-item">
-        <v-row>
-          <v-col xs="12" sm="6">
+      <swiper :options="swiperOption" class="tour-single">
+        <swiper-slide v-for="(item, i) in aboutItems" :key="i">
+          <div class="about-item">
             <div class="about-item__details pr-12">
-              <p class="about-item__title">Uzbekistan</p>
-              <p class="about-item__desc">
-                Uzbekistan is famous with sufi saints such as Jalaliddin Rumi.
-                Also, Uzbekistan is known as Bukhariah across islamic countries
-                and it leads us to conclusion that Uzbekistan had many
-                contributors in popularisation of islam and sufism to be
-                precise. Islamic regions such as Bukhara, Khiva, Samarkand,
-                Tashkent, Khorezm full of stories to tell you. Join our sufi
-                tour and find more about sufi saints by yourself
-              </p>
+              <p class="about-item__title">{{item.data.title[0].text}}</p>
+              <p class="about-item__desc">{{item.data.description[0].text}}</p>
             </div>
-          </v-col>
-          <v-col xs="12" sm="6">
+
             <div class="about-item__image">
-              <img src="../assets/about-img.png" alt />
+              <img :src="item.data.image.url" alt />
             </div>
-          </v-col>
-        </v-row>
-      </div>
+          </div>
+        </swiper-slide>
+        <div class="swiper-button-prev" slot="button-prev"></div>
+        <div class="swiper-button-next" slot="button-next"></div>
+      </swiper>
     </section>
   </v-container>
 </template>
@@ -35,26 +28,128 @@
 <style lang="scss" scoped>
 .about-item {
   color: #432a49;
+  display: flex;
 
   .about-item__details {
-    .about-item__title {
-      font-weight: bold;
-      font-size: 32px;
-      line-height: 39px;
-    }
+    width: 50%;
+  }
 
-    .about-item__desc {
-      font-size: 14px;
-      line-height: 24px;
-    }
+  .about-item__title {
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 39px;
+  }
+}
 
-    .about-item__image img {
-      width: 100%;
-    }
+.about-item__image {
+  width: 50%;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.about-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.swiper-button-prev {
+  right: 60px !important;
+  left: auto;
+  transform: rotate(180deg);
+}
+
+.swiper-container {
+  width: 100%;
+  margin-top: 0px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  top: 20px;
+  background-image: url("../assets/icons/arrow-point-to-right.svg");
+}
+
+.swiper-wrapper {
+  padding-top: -20px !important;
+}
+
+.swiper-slide {
+  padding-top: 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-item {
+    flex-direction: column-reverse;
+  }
+  .about-item__details,
+  .about-item__image {
+    width: 100% !important;
+  }
+
+  .about-item__image {
+    margin-bottom: 24px;
+    height: 300px;
+  }
+
+  .about-item__title {
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 39px;
+    text-align: center !important;
   }
 }
 </style>
 
 <script>
-export default {};
+import "swiper/dist/css/swiper.css";
+
+import { swiper, swiperSlide } from "vue-awesome-swiper";
+export default {
+  components: {
+    swiper,
+    swiperSlide
+  },
+  data() {
+    return {
+      aboutItems: [],
+      swiperOption: {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        // simulateTouch: false,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      }
+    };
+  },
+  computed: {
+    currentLang() {
+      if (this.$store.state.language.language == "en") {
+        return "en-us";
+      } else return this.$store.state.language.language;
+    }
+  },
+  methods: {
+    getAbout() {
+      this.$prismic.client
+        .query(this.$prismic.Predicates.at("document.type", "about"), {
+          lang: this.currentLang
+        })
+        .then(response => {
+          this.aboutItems = response.results;
+        });
+    }
+  },
+  watch: {
+    currentLang(newValue) {
+      this.getAbout();
+    }
+  },
+
+  created() {
+    this.getAbout();
+  }
+};
 </script>

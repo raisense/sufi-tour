@@ -2,28 +2,19 @@
   <div class="request">
     <v-container>
       <div class="wrapper">
-        <h1>
-          Leave a request
-        </h1>
-        <h4>leave your data so we can contact you soon</h4>
+        <h1>{{$t("request.title")}}</h1>
+        <h4>{{$t("request.subtitle")}}</h4>
         <form action="https://formspree.io/xknondeb" method="POST">
           <v-row>
-            <v-col cols="12 " xs="12" sm="5"
-              ><input type="text" name="name" placeholder="your name" required
-            /></v-col>
-            <v-col cols="12 " xs="12" sm="5">
-              <input
-                type="text"
-                name="email"
-                placeholder="your mail address"
-                required
-              />
+            <v-col cols="12" xs="12" sm="5">
+              <input type="text" name="name" :placeholder="$t('inputs.nameInput')" required />
             </v-col>
-            <v-col cols="12 " xs="12" sm="2"
-              ><button class="custom custom-success" type="submit">
-                send
-              </button></v-col
-            >
+            <v-col cols="12" xs="12" sm="5">
+              <input type="text" name="email" :placeholder="$t('inputs.emailInput')" required />
+            </v-col>
+            <v-col cols="12" xs="12" sm="2">
+              <button class="custom custom-success" type="submit">{{$t("inputs.sendBtn")}}</button>
+            </v-col>
           </v-row>
         </form>
       </div>

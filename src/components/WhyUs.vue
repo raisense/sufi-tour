@@ -2,56 +2,44 @@
   <section class="why-us">
     <v-container>
       <div class="wrapper">
-        <h1>WHY US?</h1>
-        <h4>
-          Sufi Tour conduct surveys and research on quality of our services. We
-          make sure to provide you high-end quality tours by leaving you
-          concentration on your goal from travel.
-        </h4>
+        <h1>{{$t("whyUs.title")}}</h1>
+        <h4>{{$t("whyUs.desc")}}</h4>
 
         <v-row>
           <v-col sm="12" md="3">
             <div class="card">
               <div class="card-icon">
-                <img src="../assets/icons/verified.svg" alt="" />
+                <img src="../assets/icons/verified.svg" alt />
               </div>
-              <div class="card-title">Safety</div>
-              <div class="card-desc">
-                we think safety is most important aspect of travel
-              </div>
+              <div class="card-title">{{$t("whyUs.cards.safety.title")}}</div>
+              <div class="card-desc">{{$t("whyUs.cards.safety.desc")}}</div>
             </div>
           </v-col>
           <v-col sm="12" md="3">
             <div class="card">
               <div class="card-icon">
-                <img src="../assets/icons/transportation.svg" alt="" />
+                <img src="../assets/icons/transportation.svg" alt />
               </div>
-              <div class="card-title">Transportation</div>
-              <div class="card-desc">
-                we think safety is most important aspect of travel
-              </div>
+              <div class="card-title">{{$t("whyUs.cards.transportation.title")}}</div>
+              <div class="card-desc">{{$t("whyUs.cards.transportation.desc")}}</div>
             </div>
           </v-col>
           <v-col sm="12" md="3">
             <div class="card">
               <div class="card-icon">
-                <img src="../assets/icons/hotel.svg" alt="" />
+                <img src="../assets/icons/hotel.svg" alt />
               </div>
-              <div class="card-title">Hotels</div>
-              <div class="card-desc">
-                we think safety is most important aspect of travel
-              </div>
+              <div class="card-title">{{$t("whyUs.cards.hotels.title")}}</div>
+              <div class="card-desc">{{$t("whyUs.cards.hotels.desc")}}</div>
             </div>
           </v-col>
           <v-col sm="12" md="3">
             <div class="card">
               <div class="card-icon">
-                <img src="../assets/icons/tour-guide.svg" alt="" />
+                <img src="../assets/icons/tour-guide.svg" alt />
               </div>
-              <div class="card-title">Guides</div>
-              <div class="card-desc">
-                we think safety is most important aspect of travel
-              </div>
+              <div class="card-title">{{$t("whyUs.cards.guides.title")}}</div>
+              <div class="card-desc">{{$t("whyUs.cards.guides.desc")}}</div>
             </div>
           </v-col>
         </v-row>

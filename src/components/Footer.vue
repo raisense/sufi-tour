@@ -7,30 +7,30 @@
           <v-col>
             <div class="footer-logo">
               <img src="../assets/logo.svg" alt />
-              <p>© Copyright 2019 Sufi Tour. All rights reserved.</p>
+              <p>© Copyright {{new Date().getFullYear()}} Sufi Tour. {{$t("footer.copyright")}}</p>
             </div>
           </v-col>
           <v-col class="d-flex justify-center">
             <div class="footer-nav">
               <ul>
                 <li>
-                  <a href="#">tours</a>
+                  <a href="#">{{$t("navigation.tours")}}</a>
                 </li>
                 <li>
-                  <a href="#">about</a>
+                  <a href="#">{{$t("navigation.about")}}</a>
                 </li>
                 <li>
-                  <a href="#">feedback & F.A.Q.</a>
+                  <a href="#">{{$t("navigation.feedback")}}</a>
                 </li>
                 <li>
-                  <a href="#">contact us</a>
+                  <a href="#">{{$t("navigation.contact_us")}}</a>
                 </li>
               </ul>
             </div>
           </v-col>
           <v-col class="d-flex justify-end">
             <div class="social-networks">
-              <p>Social Networks</p>
+              <p>{{$t("footer.social")}}</p>
               <div d-flex>
                 <a href="#" class="p-4">
                   <img src="../assets/icons/fb.svg" alt />

@@ -1,47 +1,36 @@
 <template>
   <div class="dropdown">
-    <button class="dropbtn" @click="dropdown = !dropdown">
-      {{
-        currentLanguage == "tr"
+    <v-menu bottom :offset-y="true" left>
+      <template v-slot:activator="{ on }">
+        <v-btn dark v-on="on">
+          {{
+          currentLanguage == "tr"
           ? "türkçe"
           : currentLanguage == "en"
           ? "english"
           : "русский"
-      }}
-      <!-- {{ $t("language_picker_helper") }} -->
-    </button>
-    <div class="dropdown-content" v-if="dropdown">
-      <a
-        v-for="(lang, index) in getOtherLanguage"
-        :key="index"
-        v-on:click="changeLanguage(lang)"
-        class="lang-btn"
-      >
-        <img
-          class="lang"
-          v-if="lang == 'en'"
-          src="../assets/icons/en.svg"
-          alt=""
-        />
-        <img
-          class="lang"
-          v-if="lang == 'ru'"
-          src="../assets/icons/ru.svg"
-          alt=""
-        />
-        <img
-          class="lang"
-          v-if="lang == 'tr'"
-          src="../assets/icons/tr.svg"
-          alt=""
-        />
-        <span>
-          {{
-            lang == "tr" ? "türkçe" : lang == "en" ? "english" : "русский"
-          }}</span
+          }}
+        </v-btn>
+      </template>
+
+      <v-list>
+        <v-list-item
+          v-for="(lang, index) in getOtherLanguage"
+          :key="index"
+          v-on:click="changeLanguage(lang)"
+          class="lang-btn"
         >
-      </a>
-    </div>
+          <img class="lang" v-if="lang == 'en'" src="../assets/icons/en.svg" alt />
+          <img class="lang" v-if="lang == 'ru'" src="../assets/icons/ru.svg" alt />
+          <img class="lang" v-if="lang == 'tr'" src="../assets/icons/tr.svg" alt />
+          <v-list-item-title>
+            {{
+            lang == "tr" ? "türkçe" : lang == "en" ? "english" : "русский"
+            }}
+          </v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </div>
 </template>
 <script>
@@ -69,9 +58,10 @@ export default {
   },
   methods: {
     changeLanguage(lang) {
-      this.dropdown = false;
       this.$i18n.locale = lang;
       this.$store.dispatch("language/setLanguage", lang);
+
+      // this.$router.go();
     }
   }
 };

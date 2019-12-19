@@ -118,14 +118,28 @@ export default {
       }
     };
   },
+  computed: {
+    currentLang() {
+      if (this.$store.state.language.language == "en") {
+        return "en-us";
+      } else return this.$store.state.language.language;
+    }
+  },
 
   methods: {
     getFeedbacks() {
       this.$prismic.client
-        .query(this.$prismic.Predicates.at("document.type", "feedback"))
+        .query(this.$prismic.Predicates.at("document.type", "feedback"), {
+          lang: this.currentLang
+        })
         .then(response => {
           this.feedbacks = response.results;
         });
+    }
+  },
+  watch: {
+    currentLang(newValue) {
+      this.getFeedbacks();
     }
   },
 

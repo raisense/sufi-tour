@@ -20,25 +20,20 @@
               :to="this.$route == '/' ? '#about' : '/'"
               v-scroll-to="'#about'"
               text
-              >about</router-link
-            >
-            <router-link class="elevation-0" :to="`/tours`" text
-              >tours</router-link
-            >
+            >{{$t("navigation.about")}}</router-link>
+            <router-link class="elevation-0" :to="`/tours`" text>{{$t("navigation.tours")}}</router-link>
             <router-link
               class="elevation-0"
               :to="this.$route == '/' ? '#feedback' : '/'"
               v-scroll-to="'#feedback'"
               text
-              >feedbacks</router-link
-            >
+            >{{$t("navigation.feedback")}}</router-link>
             <router-link
               class="elevation-0"
               :to="this.$route == '/' ? '#contact-us' : '/'"
               v-scroll-to="'#contact-us'"
               text
-              >contact us</router-link
-            >
+            >{{$t("navigation.contact_us")}}</router-link>
           </v-toolbar-items>
           <v-spacer></v-spacer>
           <v-toolbar-items>
@@ -56,16 +51,11 @@
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
                 </v-list-item>
               </v-list>
-            </v-menu> -->
+            </v-menu>-->
             <LanguagePicker></LanguagePicker>
-            <a href="tel:+998 90 123 45 67" class="hide-on-mobile"
-              >+998 90 123 45 67</a
-            >
+            <a href="tel:+998 90 123 45 67" class="hide-on-mobile">+998 90 123 45 67</a>
 
-            <v-app-bar-nav-icon
-              class="show-on-mobile"
-              @click.stop="drawer = !drawer"
-            ></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon class="show-on-mobile" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
           </v-toolbar-items>
         </div>
       </v-container>
@@ -81,9 +71,7 @@
         <v-list-item link>
           <v-list-item-content>
             <v-list-item-title>
-              <router-link class="elevation-0" to="/about" text
-                >about</router-link
-              >
+              <router-link class="elevation-0" to="/about" text>about</router-link>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>

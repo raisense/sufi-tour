@@ -2,7 +2,7 @@
   <v-container id="tours">
     <section class="tours">
       <div class="section-header d-flex justify-space-between mb-12">
-        <h3 class="section-title">: tours</h3>
+        <h3 class="section-title">: {{$t("navigation.tours")}}</h3>
         <router-link to="/tours">
           <span>all tours</span>
           <img src="../assets/icons/arrow-point-to-right.svg" alt />
@@ -128,7 +128,7 @@ export default {
     getLatestTours() {
       this.$prismic.client
         .query(this.$prismic.Predicates.at("document.type", "tour"))
-        .then((response) => {
+        .then(response => {
           this.latest = JSON.parse(JSON.stringify(response.results));
         });
     }

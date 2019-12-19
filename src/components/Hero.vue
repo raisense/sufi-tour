@@ -2,25 +2,25 @@
   <!-- <div class="hero"> -->
   <v-parallax class="hero" src="../assets/hero-img.png">
     <div class="hero-content">
-      <h1 class="hero-title">What you seek is seeking you.</h1>
-      <h5 class="hero-subtitle">Group travels across uzbekistan</h5>
-      <h5 class="hero-subtitle">{{ $t("greeting") }}</h5>
+      <h1 class="hero-title">{{$t("heroContent.title")}}</h1>
+      <h5 class="hero-subtitle">{{$t("heroContent.subtitle")}}</h5>
+
       <div class="counters mt-12 d-flex justify-space-between">
         <div class="counter-item text-center">
           <div class="counter-item__number">1327+</div>
-          <div class="counter-item__text">traveled</div>
+          <div class="counter-item__text">{{$t("heroContent.counters.one")}}</div>
         </div>
         <div class="counter-item text-center">
           <div class="counter-item__number">38+</div>
-          <div class="counter-item__text">contries</div>
+          <div class="counter-item__text">{{$t("heroContent.counters.two")}}</div>
         </div>
         <div class="counter-item text-center">
           <div class="counter-item__number">13+</div>
-          <div class="counter-item__text">sufi saints</div>
+          <div class="counter-item__text">{{$t("heroContent.counters.three")}}</div>
         </div>
       </div>
       <div class="scroll-btn">
-        <a href="#" v-scroll-to="'#tours'">see our tours</a>
+        <a href="#" v-scroll-to="'#tours'">{{$t("heroContent.scrollText")}}</a>
         <div class="icon-scroll"></div>
       </div>
     </div>
