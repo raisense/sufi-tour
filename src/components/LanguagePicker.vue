@@ -2,7 +2,7 @@
   <div class="dropdown">
     <v-menu bottom :offset-y="true" left>
       <template v-slot:activator="{ on }">
-        <v-btn dark v-on="on">
+        <v-btn dark v-on="on" :ripple="false">
           {{
           currentLanguage == "tr"
           ? "türkçe"
@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     currentLanguage() {
-      return this.$store.state.language.language;
+      return this.$store.state.language.language || this.$i18n.locale || "en";
     },
     getOtherLanguage() {
       switch (this.currentLanguage) {
@@ -66,7 +66,27 @@ export default {
   }
 };
 </script>
-<style>
+
+<style lang="scss" scoped >
+.dropdown button {
+  text-transform: lowercase;
+  background-color: transparent !important;
+  box-shadow: none;
+  padding-top: 0 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  margin-top: -7px;
+  font-weight: normal;
+
+  &:before {
+    content: none;
+  }
+}
+.v-ripple__container {
+  display: none !important;
+  opacity: 0 !important;
+}
+
 .dropdown {
   float: right;
   overflow: hidden;

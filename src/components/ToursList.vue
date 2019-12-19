@@ -10,60 +10,27 @@
       </div>
       <div class="tour-cards">
         <v-row>
-          <v-col cols="12" sm="6" md="4" lg="3">
-            <div class="tour-card">
-              <div class="tour-card__img">
-                <img src="../assets/card-1.png" alt />
-              </div>
-              <div class="tour-card__desc">
-                <p class="tour-card__title">Salvation tour</p>
-                <v-row class="tour-card__additional justify-space-around">
-                  <v-col class="py-1">DAYS: 7</v-col>
-                  <v-col class="py-1">PRICE: 450$</v-col>
-                </v-row>
-              </div>
-            </div>
-          </v-col>
-          <v-col xs="12" sm="6" md="4" lg="3">
-            <div class="tour-card">
-              <div class="tour-card__img">
-                <img src="../assets/card-2.png" alt />
-              </div>
-              <div class="tour-card__desc">
-                <p class="tour-card__title">Salvation tour</p>
-                <v-row class="tour-card__additional justify-space-around">
-                  <v-col class="py-1">DAYS: 7</v-col>
-                  <v-col class="py-1">PRICE: 450$</v-col>
-                </v-row>
-              </div>
-            </div>
-          </v-col>
-          <v-col cols="12" sm="6" md="4" lg="3">
-            <div class="tour-card">
-              <div class="tour-card__img">
-                <img src="../assets/card-3.png" alt />
-              </div>
-              <div class="tour-card__desc">
-                <p class="tour-card__title">Salvation tour</p>
-                <v-row class="tour-card__additional justify-space-around">
-                  <v-col class="py-1">DAYS: 7</v-col>
-                  <v-col class="py-1">PRICE: 450$</v-col>
-                </v-row>
-              </div>
-            </div>
-          </v-col>
-          <v-col cols="12" sm="6" md="4" lg="3">
-            <div class="tour-card">
-              <div class="tour-card__img">
-                <img src="../assets/card-1.png" alt />
-              </div>
-              <div class="tour-card__desc">
-                <p class="tour-card__title">Salvation tour</p>
-                <v-row class="tour-card__additional justify-space-around">
-                  <v-col class="py-1">DAYS: 7</v-col>
-                  <v-col class="py-1">PRICE: 450$</v-col>
-                </v-row>
-              </div>
+          <v-col cols="12" sm="6" md="4" lg="4" v-for="(item,i) in tours" :key="i">
+            <div class="tour-card" v-if="i < 3">
+              <router-link :to="`/tours/${item.id}`">
+                <div class="tour-card__img">
+                  <img :src="item.data.image.url" alt />
+                </div>
+                <div class="tour-card__desc">
+                  <p class="tour-card__title">{{item.data.name[0].text}}</p>
+
+                  <v-row class="tour-card__additional justify-space-around">
+                    <v-col class="py-1" cols="7">
+                      <strong>{{$t("tour_item.header.duration") + ": "}}</strong>
+                      {{ $tc("tour_item.header.days", getDuration(item.data.start_date, item.data.end_date))}}
+                    </v-col>
+                    <v-col class="py-1" cols="5">
+                      <strong>{{$t("tour_item.header.price") + ":"}}</strong>
+                      {{ "$" + item.data.price}}
+                    </v-col>
+                  </v-row>
+                </div>
+              </router-link>
             </div>
           </v-col>
         </v-row>
@@ -78,6 +45,14 @@
     background: #ffffff;
     border-radius: 25px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+
+    a {
+      text-decoration: none;
+      color: #432a49;
+    }
+    a:hover {
+      border-bottom: 1px solid #432a49;
+    }
 
     .tour-card__img {
       border-radius: 25px;
@@ -109,6 +84,10 @@
     .tour-card__additional {
       font-size: 14px;
 
+      &:div:first-child {
+        text-transform: uppercase;
+      }
+
       & *:last-child {
         text-align: right;
       }
@@ -121,17 +100,45 @@
 export default {
   data() {
     return {
-      latest: []
+      loading: false,
+      tours: null
     };
   },
-  methods: {
-    getLatestTours() {
-      this.$prismic.client
-        .query(this.$prismic.Predicates.at("document.type", "tour"))
-        .then(response => {
-          this.latest = JSON.parse(JSON.stringify(response.results));
-        });
+  computed: {
+    currentLang() {
+      if (this.$store.state.language.language == "en") {
+        return "en-us";
+      } else return this.$store.state.language.language;
     }
+  },
+  watch: {
+    currentLang(newValue) {
+      console.log("language changed to " + newValue);
+      this.getAllTours();
+    }
+  },
+  methods: {
+    getAllTours() {
+      this.loading = true;
+      this.$prismic.client
+        .query(this.$prismic.Predicates.at("document.type", "tour"), {
+          lang: this.currentLang
+        })
+        .then(response => {
+          console.log(response);
+          this.tours = JSON.parse(JSON.stringify(response.results));
+          this.loading = false;
+        });
+    },
+    getDuration(start, end) {
+      const startDate = new Date(start).getTime(),
+        endDate = new Date(end).getTime(),
+        difference = (endDate - startDate) / (1000 * 3600 * 24);
+      return difference;
+    }
+  },
+  created() {
+    this.getAllTours();
   }
 };
 </script>

@@ -5,7 +5,7 @@
         <div class="d-flex">
           <router-link :to="`/`">
             <v-img
-              alt="Vuetify Logo"
+              alt="Sufi Tour"
               class="shrink mr-2"
               contain
               src="../assets/logo.svg"
@@ -37,44 +37,82 @@
           </v-toolbar-items>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <!-- <v-menu bottom left>
-              <template v-slot:activator="{ on }">
-                <v-btn dark icon v-on="on">En</v-btn>
-              </template>
+            <LanguagePicker class="hide-on-mobile"></LanguagePicker>
+            <a href="tel:+998 90 123 45 67" class="hide-on-mobile phone-number">+998 71 252 13 35</a>
 
-              <v-list>
-                <v-list-item
-                  v-for="(item, i) in languages"
-                  :key="i"
-                  @click.stop
-                >
-                  <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>-->
-            <LanguagePicker></LanguagePicker>
-            <a href="tel:+998 90 123 45 67" class="hide-on-mobile">+998 90 123 45 67</a>
-
-            <v-app-bar-nav-icon class="show-on-mobile" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon
+              :ripple="false"
+              class="show-on-mobile"
+              @click.stop="drawer = !drawer"
+            ></v-app-bar-nav-icon>
           </v-toolbar-items>
         </div>
       </v-container>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" absolute dark temporary>
       <v-list-item>
-        <v-img src="../assets/logo.svg"></v-img>
+        <v-img
+          alt="Sufi Tour"
+          class="shrink mr-2"
+          contain
+          src="../assets/logo.svg"
+          transition="slide-y-transition"
+          width="120"
+        ></v-img>
       </v-list-item>
 
       <v-divider></v-divider>
 
-      <v-list dense>
-        <v-list-item link>
-          <v-list-item-content>
-            <v-list-item-title>
-              <router-link class="elevation-0" to="/about" text>about</router-link>
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+      <v-list dense nav>
+        <router-link
+          class="elevation-0"
+          :to="this.$route == '/' ? '#about' : '/'"
+          v-scroll-to="'#about'"
+          @click.stop="drawer = false"
+          w
+        >
+          <v-list-item link>
+            <v-list-item-content>
+              <v-list-item-title>{{$t("navigation.about")}}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
+        <router-link
+          class="elevation-0"
+          :to="`/tours`"
+          v-scroll-to="'#about'"
+          @click.stop="drawer = false"
+        >
+          <v-list-item link>
+            <v-list-item-content>
+              <v-list-item-title>{{$t("navigation.tours")}}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
+        <router-link
+          class="elevation-0"
+          :to="this.$route == '/' ? '#about' : '/'"
+          v-scroll-to="'#about'"
+          @click.stop="drawer = false"
+        >
+          <v-list-item link>
+            <v-list-item-content>
+              <v-list-item-title>{{$t("navigation.contact_us")}}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
+        <router-link
+          class="elevation-0"
+          :to="this.$route == '/' ? '#about' : '/'"
+          v-scroll-to="'#about'"
+          @click.stop="drawer = false"
+        >
+          <v-list-item link>
+            <v-list-item-content>
+              <v-list-item-title>{{$t("navigation.feedback")}}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
       </v-list>
     </v-navigation-drawer>
   </div>
@@ -102,6 +140,12 @@
     // height: 1.2px;
     // background-color: #fff;
   }
+}
+
+.phone-number {
+  font-size: 14px;
+  margin-right: 0 !important;
+  margin-left: 12px;
 }
 </style>
 

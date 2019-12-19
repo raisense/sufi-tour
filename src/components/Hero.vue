@@ -114,9 +114,9 @@
   border: 2px solid #fff;
   border-radius: 25px;
 }
-@media (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .icon-scroll {
-    position: relative;
+    // position: relative;
   }
 }
 .icon-scroll:before {
