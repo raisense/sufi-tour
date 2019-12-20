@@ -68,7 +68,7 @@
           <div class="tour-big-content">
             <h1 class="text-center">{{$t("tour_item.header.roadmap")}}</h1>
             <div class="tour-date text-center">{{getDifference(start, end)}}</div>
-            <div class="d-flex justify-space-between">
+            <!-- <div class="d-flex justify-space-between">
               <div class="arrival">
                 <strong>{{$t("tour_item.header.arrival")}}:</strong>
                 <span>Tashkent</span>
@@ -77,7 +77,7 @@
                 <strong>{{$t("tour_item.header.departure")}}:</strong>
                 <span>Khiva</span>
               </div>
-            </div>
+            </div>-->
             <div>
               <swiper :options="swiperOption" class="tour-single">
                 <swiper-slide v-for="(item, i) in slices" :key="i">
@@ -448,6 +448,7 @@ input {
 
   .tour-big-content {
     padding: 24px 64px;
+
     .tour-date {
       margin-bottom: 16px;
       color: #63d66e;

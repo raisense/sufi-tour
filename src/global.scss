@@ -164,10 +164,53 @@ input:focus {
     margin: 0 auto;
   }
 
+  .tour-header {
+    .row {
+
+      flex-direction: column;
+    }
+  }
+
+  .tour-big-content {
+    .row {
+      flex-direction: column;
+    }
+
+    .tour-single-title {
+      font-size: 42px !important;
+    }
+
+
+    .scroll-area {
+      height: auto !important;
+    }
+
+    .swiper-button-prev {
+      left: 10px !important;
+      right: auto !important;
+    }
+
+    .tour-single-img {
+      width: 100%;
+      border-radius: 0 !important;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: auto !important;
+        border-radius: 0 !important;
+      }
+    }
+  }
+
   .tour-item {
     flex-direction: column;
     max-height: none !important;
     height: auto !important;
+
+    .custom {
+      margin-top: 24px;
+    }
 
     .tour-img {
       max-width: 100% !important;
