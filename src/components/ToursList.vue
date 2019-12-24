@@ -20,13 +20,13 @@
                   <p class="tour-card__title">{{item.data.name[0].text}}</p>
 
                   <v-row class="tour-card__additional justify-space-around">
-                    <v-col class="py-1" cols="7">
+                    <v-col class="py-1" cols="6">
                       <strong>{{$t("tour_item.header.duration") + ": "}}</strong>
-                      {{ $tc("tour_item.header.days", getDuration(item.data.start_date, item.data.end_date))}}
+                      {{ item.data.duration}}
                     </v-col>
-                    <v-col class="py-1" cols="5">
+                    <v-col class="py-1" cols="6">
                       <strong>{{$t("tour_item.header.price") + ":"}}</strong>
-                      {{ "$" + item.data.price}}
+                      {{$i18n.locale == "en" ? "from " : $i18n.locale == "ru" ? "от " : ""}} {{ "$" + item.data.price}} {{$i18n.locale == 'tr' ? "'dan başlayan" : ''}}
                     </v-col>
                   </v-row>
                 </div>
@@ -129,12 +129,6 @@ export default {
           this.tours = JSON.parse(JSON.stringify(response.results));
           this.loading = false;
         });
-    },
-    getDuration(start, end) {
-      const startDate = new Date(start).getTime(),
-        endDate = new Date(end).getTime(),
-        difference = (endDate - startDate) / (1000 * 3600 * 24);
-      return difference;
     }
   },
   created() {

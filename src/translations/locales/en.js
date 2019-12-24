@@ -90,7 +90,7 @@ export default {
       included: {
         title: "included in price",
         hotels: "hotels",
-        flight: "internal flights",
+        flight: "domestic flights",
         food: "food",
         transportation: "transportation"
       }

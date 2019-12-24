@@ -78,23 +78,23 @@
             <img :src="item.data.image.url" alt />
           </div>
           <div class="tour-details pl-8">
-            <div class="tour-date">{{ getDifference(item.data.start_date, item.data.end_date) }}</div>
+            <!-- <div class="tour-date">{{ getDifference(item.data.start_date, item.data.end_date) }}</div> -->
             <div class="tour-name">{{ item.data.name[0].text }}</div>
             <div class="tour-desc">{{ item.data.description[0].text | truncate(194) }}</div>
             <div class="tour-footer">
               <v-row>
-                <v-col cols="3">
+                <v-col xs="12" sm="3" md="4" lg="4">
                   <p class="duration-label">{{$t("tours.duration")}}:</p>
                   <p class="duration-text">
                     <!-- {{ }} -->
-                    {{$tc("tour_item.header.days", getDuration(item.data.start_date, item.data.end_date))}}
+                    {{item.data.duration}}
                   </p>
                 </v-col>
-                <v-col cols="3">
+                <v-col xs="12" sm="3" md="4" lg="4">
                   <p class="price-label">{{$t("tours.price")}}:</p>
                   <p
                     class="price-text"
-                  >{{$i18n.locale == "en" ? "from " : $i18n.locale == "ru" ? "от " : ""}} ${{ item.data.price }} {{$i18n.locale == 'tr' ? "'dan başlayan fiyatlarla" : ''}}</p>
+                  >{{$i18n.locale == "en" ? "from " : $i18n.locale == "ru" ? "от " : ""}} ${{ item.data.price }} {{$i18n.locale == 'tr' ? "'dan başlayan" : ''}}</p>
                 </v-col>
               </v-row>
             </div>
@@ -195,9 +195,14 @@ export default {
   margin-bottom: 0 !important;
 }
 
+.tours-list-big {
+  .tour-item {
+    max-height: 240px;
+  }
+}
+
 .tour-item {
   color: #432a49;
-  max-height: 240px;
   background-color: #fff;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.05);
   border-radius: 15px;
@@ -221,11 +226,12 @@ export default {
 
   .tour-details {
     padding: 16px 0;
+    min-width: 60%;
   }
 
   .tour-img {
-    min-height: 240px;
-    max-width: 40%;
+    // min-height: 240px;
+    min-width: 40%;
 
     img {
       width: 100%;
@@ -252,6 +258,12 @@ export default {
   .tour-desc {
     font-size: 14px;
     width: 70%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .tour-footer {
+    width: 100% !important;
   }
 }
 </style>

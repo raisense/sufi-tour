@@ -6,7 +6,7 @@
           <v-col class="text-center" cols="12">
             <h1 class="display-1 font-weight-bold mb-4">{{ name }}</h1>
 
-            <div class="tour-date">{{getDifference(start, end)}}</div>
+            <div class="tour-date">{{duration}}</div>
           </v-col>
         </v-row>
       </v-parallax>
@@ -33,7 +33,9 @@
               <img :src="image.url" :alt="name" />
             </div>
             <div class="tour-details pl-8">
-              <div class="tour-name">About {{ name }}</div>
+              <div
+                class="tour-name"
+              >{{$i18n.locale == "en" ? "About " : $i18n.locale == "ru" ? "О " : ""}} {{ name }} {{$i18n.locale == 'tr' ? "hakkında" : ''}}</div>
               <div class="tour-desc">{{ desc }}</div>
             </div>
             <button
@@ -53,11 +55,11 @@
               </v-col>
               <v-col>
                 <strong>{{$t("tour_item.header.price")}}:</strong>
-                <span>$ {{ price }}</span>
+                <span>{{$i18n.locale == "en" ? "from " : $i18n.locale == "ru" ? "от " : ""}} $ {{ price }} {{$i18n.locale == 'tr' ? "'dan başlayan" : ''}}</span>
               </v-col>
               <v-col>
                 <strong>{{$t("tour_item.header.duration")}}:</strong>
-                <span>{{$tc("tour_item.header.days", getDuration(start, end))}}</span>
+                <span>{{duration}}</span>
               </v-col>
               <v-col>
                 <strong>{{$t("tour_item.header.duration")}}:</strong>
@@ -67,45 +69,37 @@
           </div>
           <div class="tour-big-content">
             <h1 class="text-center">{{$t("tour_item.header.roadmap")}}</h1>
-            <div class="tour-date text-center">{{getDifference(start, end)}}</div>
-            <!-- <div class="d-flex justify-space-between">
+            <div class="d-flex justify-space-between">
               <div class="arrival">
                 <strong>{{$t("tour_item.header.arrival")}}:</strong>
-                <span>Tashkent</span>
+                <span>{{arrival}}</span>
               </div>
               <div class="departure">
                 <strong>{{$t("tour_item.header.departure")}}:</strong>
-                <span>Khiva</span>
+                <span>{{departure}}</span>
               </div>
-            </div>-->
+            </div>
             <div>
-              <swiper :options="swiperOption" class="tour-single">
-                <swiper-slide v-for="(item, i) in slices" :key="i">
-                  <v-row>
-                    <v-col>
-                      <div class="tour-single-img">
-                        <img :src="item.primary.image_banner.url" alt />
+              <div v-for="(item, i) in slices" :key="i" class="tour-single">
+                <v-row>
+                  <v-col cols="5">
+                    <div class="tour-single-img">
+                      <img :src="item.primary.image_banner.url" alt />
+                    </div>
+                  </v-col>
+                  <v-col cols="7">
+                    <div class="tour-single-title d-flex">
+                      <div>
+                        <div class="day-label">{{$t("tour_item.header.day")}}:</div>
+                        <div class="day-number">0{{ item.primary.day_number }}</div>
                       </div>
-                    </v-col>
-                    <v-col>
-                      <div class="tour-single-title d-flex">
-                        <div>
-                          <div class="day-label">{{$t("tour_item.header.day")}}:</div>
-                          <div class="day-number">0{{ item.primary.day_number }}</div>
-                        </div>
-                        <h3>{{ item.primary.destination_name[0].text }}</h3>
-                      </div>
-                      <div class="scroll-area">
-                        <smooth-scrollbar>
-                          <div class="tour-single-desc">{{ item.primary.description[0].text }}</div>
-                        </smooth-scrollbar>
-                      </div>
-                    </v-col>
-                  </v-row>
-                </swiper-slide>
-                <div class="swiper-button-prev" slot="button-prev"></div>
-                <div class="swiper-button-next" slot="button-next"></div>
-              </swiper>
+                      <h3>{{ item.primary.destination_name[0].text }}</h3>
+                    </div>
+                    <div class="tour-single-desc">{{ item.primary.description[0].text }}</div>
+                  </v-col>
+                </v-row>
+              </div>
+
               <h4
                 class="included-services-title text-center"
               >{{$t("tour_item.header.included.title")}}:</h4>
@@ -198,8 +192,8 @@ export default {
       price: null,
       duration: null,
       distance: null,
-      start: null,
-      end: null,
+      arrival: null,
+      departure: null,
       color: null,
       slices: [],
       alternativeLang: [],
@@ -228,12 +222,13 @@ export default {
 
           this.name = data.name[0].text;
           this.desc = data.description[0].text;
-          this.image = data.image;
           this.people = data.group_size[0].text || data.group_size;
+          this.image = data.image;
           this.distance = data.distance;
-          this.start = data.start_date;
-          this.end = data.end_date;
+          this.arrival = data.arrival;
+          this.departure = data.departure;
           this.price = data.price;
+          this.duration = data.duration;
           this.color = data.tour_color;
           this.slices = data.body;
           this.alternativeLang = response.results[0].alternate_languages;
@@ -241,24 +236,6 @@ export default {
         });
 
       this.loading = false;
-    },
-    getDuration(start, end) {
-      const startDate = new Date(start).getTime(),
-        endDate = new Date(end).getTime(),
-        difference = (endDate - startDate) / (1000 * 3600 * 24);
-      return difference;
-    },
-    getDifference(start, end) {
-      const startMonth = new Date(start).getMonth();
-      const startYear = new Date(start).getYear();
-      const startDay = new Date(start).getDate();
-      const endMonth = new Date(end).getMonth();
-      const endYear = new Date(end).getYear();
-      const endDay = new Date(end).getDate();
-
-      if (startYear == endYear) {
-        return `${startMonth}/${startDay} - ${endMonth}/${endDay}`;
-      } else return start + " - " + end;
     }
   },
   watch: {
@@ -286,6 +263,22 @@ input {
 .v-form {
   background-color: #fff !important;
   padding: 32px 48px;
+}
+
+.tour-details {
+  padding: 16px 0;
+  width: 60%;
+}
+
+.tour-img {
+  width: 40%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
 }
 
 @media screen and (max-width: 576px) {
@@ -328,7 +321,6 @@ input {
 
 .tour-item {
   color: #432a49;
-  max-height: 240px;
   background-color: #fff;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.05);
   border-radius: 15px;
@@ -352,11 +344,11 @@ input {
 
   .tour-details {
     padding: 16px 0;
+    width: 100%;
   }
 
   .tour-img {
-    // width: 50%;
-
+    width: 100%;
     img {
       width: 100%;
       height: 100%;
@@ -404,7 +396,7 @@ input {
   .tour-single-img {
     width: 100%;
     height: 100%;
-    max-height: 400px;
+    max-height: 300px;
     border-radius: 15px;
     overflow: hidden;
     img {
@@ -474,6 +466,7 @@ input {
     }
 
     .day-number {
+      color: #63d66e;
       font-size: 32px;
     }
 

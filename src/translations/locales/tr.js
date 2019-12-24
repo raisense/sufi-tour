@@ -90,7 +90,7 @@ export default {
       included: {
         title: "fiyata dahil",
         hotels: "oteller",
-        flight: "dahili uçuşlar",
+        flight: "iç hat uçuşları",
         food: "yiyecek",
         transportation: "ulaşım"
       }
