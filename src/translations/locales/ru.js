@@ -2,7 +2,7 @@ export default {
   navigation: {
     about: "о нас",
     tours: "туры",
-    feedback: "Комментарии",
+    feedback: "комментарии",
     contact_us: "свяжитесь с нами"
   },
   heroContent: {

@@ -2,7 +2,7 @@ export default {
   navigation: {
     about: "hakkımızda",
     tours: "turlar",
-    feedback: "Yorumlar",
+    feedback: "yorumlar",
     contact_us: "bize ulaşın"
   },
   heroContent: {

@@ -2,7 +2,7 @@
   <div class="faq">
     <div class="faq-header d-flex justify-space-between align-center mb-8">
       <h3>F.A.Q</h3>
-      <button class="custom custom-success" @click.stop="dialog = true">leave a question</button>
+      <button class="custom custom-success" @click.stop="dialog = true">{{$t('faq.formTitle')}}</button>
     </div>
     <div class="faq-body">
       <v-expansion-panels :accordion="true" class="elevation-0">
@@ -16,27 +16,27 @@
     </div>
     <div class="faq-footer d-flex justify-end">
       <router-link to="/tours">
-        <span>all questions</span>
+        <span>{{$t('faq.link')}}</span>
         <img src="../assets/icons/arrow-point-to-right.svg" alt />
       </router-link>
     </div>
     <v-dialog v-model="dialog" max-width="500">
       <v-form>
         <v-container>
-          <h1>Leave your question</h1>
-          <p>we will answer to your question via personal mail</p>
+          <h1>{{$t("faq.formTitle")}}</h1>
+          <p>{{$t("faq.formSubtitle")}}</p>
           <v-row>
             <v-col cols="12">
-              <input type="text" name placeholder="your name" required />
+              <input type="text" name :placeholder="$t('inputs.nameInput')" required />
             </v-col>
             <v-col cols="12">
-              <input type="email" name placeholder="your mail address" required />
+              <input type="email" name :placeholder="$t('inputs.emailInput')" required />
             </v-col>
             <v-col cols="12">
-              <input type="text" name placeholder="type your question here" required />
+              <input type="text" name :placeholder="$t('inputs.questionInput')" required />
             </v-col>
             <v-col cols="12">
-              <button class="custom custom-success">send</button>
+              <button class="custom custom-success">{{$t('inputs.sendBtn')}}</button>
             </v-col>
           </v-row>
         </v-container>
