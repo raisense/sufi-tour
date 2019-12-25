@@ -10,7 +10,11 @@
           <div class="about-item">
             <div class="about-item__details pr-12">
               <p class="about-item__title">{{item.data.title[0].text}}</p>
-              <p class="about-item__desc">{{item.data.description[0].text}}</p>
+              <div id="scroll-area">
+                <smooth-scrollbar>
+                  <about-desc :desc="item.data.description"></about-desc>
+                </smooth-scrollbar>
+              </div>
             </div>
 
             <div class="about-item__image">
@@ -25,7 +29,84 @@
   </v-container>
 </template>
 
+<script>
+import "swiper/dist/css/swiper.css";
+import Vue from "vue";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
+
+Vue.component("aboutDesc", {
+  props: ["desc"],
+  render: function(createElement) {
+    var self = this;
+    if (self.desc.length > 0) {
+      return createElement(
+        "div",
+        self.desc.map(el => {
+          return createElement("p", el.text);
+        })
+      );
+    }
+  }
+});
+
+export default {
+  components: {
+    swiper,
+    swiperSlide
+  },
+  data() {
+    return {
+      aboutItems: [],
+      swiperOption: {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        // simulateTouch: false,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      }
+    };
+  },
+  computed: {
+    currentLang() {
+      if (this.$store.state.language.language == "en") {
+        return "en-us";
+      } else return this.$store.state.language.language;
+    }
+  },
+  methods: {
+    getAbout() {
+      this.$prismic.client
+        .query(this.$prismic.Predicates.at("document.type", "about"), {
+          lang: this.currentLang
+        })
+        .then(response => {
+          this.aboutItems = response.results;
+        });
+    }
+  },
+  watch: {
+    currentLang(newValue) {
+      this.getAbout();
+    }
+  },
+
+  created() {
+    this.getAbout();
+  }
+};
+</script>
+
 <style lang="scss" scoped>
+#scroll-area {
+  height: 500px;
+
+  .scroll-content {
+    padding-right: 24px;
+  }
+}
+
 .about-item {
   color: #432a49;
   display: flex;
@@ -101,55 +182,4 @@
 }
 </style>
 
-<script>
-import "swiper/dist/css/swiper.css";
 
-import { swiper, swiperSlide } from "vue-awesome-swiper";
-export default {
-  components: {
-    swiper,
-    swiperSlide
-  },
-  data() {
-    return {
-      aboutItems: [],
-      swiperOption: {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        // simulateTouch: false,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
-      }
-    };
-  },
-  computed: {
-    currentLang() {
-      if (this.$store.state.language.language == "en") {
-        return "en-us";
-      } else return this.$store.state.language.language;
-    }
-  },
-  methods: {
-    getAbout() {
-      this.$prismic.client
-        .query(this.$prismic.Predicates.at("document.type", "about"), {
-          lang: this.currentLang
-        })
-        .then(response => {
-          this.aboutItems = response.results;
-        });
-    }
-  },
-  watch: {
-    currentLang(newValue) {
-      this.getAbout();
-    }
-  },
-
-  created() {
-    this.getAbout();
-  }
-};
-</script>
