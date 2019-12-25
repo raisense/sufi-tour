@@ -12,7 +12,7 @@
               <p class="about-item__title">{{item.data.title[0].text}}</p>
               <div id="scroll-area">
                 <smooth-scrollbar>
-                  <about-desc :desc="item.data.description"></about-desc>
+                  <richtext :desc="item.data.description"></richtext>
                 </smooth-scrollbar>
               </div>
             </div>
@@ -34,7 +34,7 @@ import "swiper/dist/css/swiper.css";
 import Vue from "vue";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 
-Vue.component("aboutDesc", {
+Vue.component("richtext", {
   props: ["desc"],
   render: function(createElement) {
     var self = this;
