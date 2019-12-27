@@ -1,6 +1,6 @@
 export default {
   navigation: {
-    about: "about",
+    about: "golden chain",
     tours: "tours",
     feedback: "feedback",
     contact_us: "contact us"

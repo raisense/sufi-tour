@@ -1,6 +1,6 @@
 export default {
   navigation: {
-    about: "hakkımızda",
+    about: "altın silsile",
     tours: "turlar",
     feedback: "yorumlar",
     contact_us: "bize ulaşın"

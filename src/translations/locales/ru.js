@@ -1,6 +1,6 @@
 export default {
   navigation: {
-    about: "о нас",
+    about: "золотая цепочка",
     tours: "туры",
     feedback: "комментарии",
     contact_us: "свяжитесь с нами"

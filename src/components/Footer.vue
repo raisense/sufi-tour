@@ -37,7 +37,7 @@
                 href="tel:+998 90 123 45 67"
                 class="phone-number"
                 style="color: #f1f1f1; text-decoration:none; "
-                >+998 71 252 13 35</a
+                >+998 93 184 83 93</a
               >
               <p class="text-center text-sm-left mt-2">
                 {{ $t("footer.social") }}

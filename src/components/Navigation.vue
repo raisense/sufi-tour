@@ -44,7 +44,7 @@
           <v-toolbar-items>
             <LanguagePicker class="hide-on-mobile"></LanguagePicker>
             <a href="tel:+998 90 123 45 67" class="hide-on-mobile phone-number"
-              >+998 71 252 13 35</a
+              >+998 93 184 83 93</a
             >
 
             <v-app-bar-nav-icon
@@ -75,8 +75,7 @@
           class="elevation-0"
           :to="this.$route == '/' ? '#about' : '/'"
           v-scroll-to="'#about'"
-          @click.stop="drawer = !drawer"
-          w
+          @click="drawer = !drawer"
         >
           <v-list-item link>
             <v-list-item-content>
