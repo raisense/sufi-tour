@@ -2,16 +2,16 @@
   <v-container id="about">
     <section class="about-list full-section py-12">
       <div class="section-header d-flex justify-space-between mb-n8">
-        <h3 class="section-title">: {{$t("navigation.about")}}</h3>
+        <h3 class="section-title">: {{ $t("navigation.about") }}</h3>
       </div>
 
       <swiper :options="swiperOption" class="tour-single">
-        <swiper-slide v-for="(item, i) in aboutItems" :key="i">
+        <swiper-slide v-for="(item, i) in sortedList" :key="i">
           <div class="about-item">
             <div class="about-item__details pr-12">
-              <p class="about-item__title">{{item.data.title[0].text}}</p>
+              <p class="about-item__title">{{ item.data.title[0].text }}</p>
               <div id="scroll-area">
-                <smooth-scrollbar>
+                <smooth-scrollbar class="pr-6">
                   <richtext :desc="item.data.description"></richtext>
                 </smooth-scrollbar>
               </div>
@@ -41,7 +41,7 @@ Vue.component("richtext", {
     if (self.desc.length > 0) {
       return createElement(
         "div",
-        self.desc.map(el => {
+        self.desc.map((el) => {
           return createElement("p", el.text);
         })
       );
@@ -73,6 +73,10 @@ export default {
       if (this.$store.state.language.language == "en") {
         return "en-us";
       } else return this.$store.state.language.language;
+    },
+
+    sortedList() {
+      return _.orderBy(this.aboutItems, "data.order");
     }
   },
   methods: {
@@ -81,8 +85,9 @@ export default {
         .query(this.$prismic.Predicates.at("document.type", "about"), {
           lang: this.currentLang
         })
-        .then(response => {
+        .then((response) => {
           this.aboutItems = response.results;
+          console.log(response);
         });
     }
   },
@@ -181,5 +186,3 @@ export default {
   }
 }
 </style>
-
-

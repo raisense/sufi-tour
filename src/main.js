@@ -7,6 +7,9 @@ import SmoothScrollbar from "vue-smooth-scrollbar";
 import PrismicVue from "prismic-vue";
 import linkResolver from "./link-resolver";
 import { i18n } from "./plugins/i18n.js";
+import VueLodash from "vue-lodash";
+
+const options = { name: "lodash" }; // customize the way you want to call it
 
 var VueScrollTo = require("vue-scrollto");
 
@@ -18,6 +21,7 @@ const accessToken =
 Vue.use(SmoothScrollbar);
 
 Vue.use(VueScrollTo);
+Vue.use(VueLodash, options); // options is optional
 
 // You can also pass in the default options
 Vue.use(VueScrollTo, {

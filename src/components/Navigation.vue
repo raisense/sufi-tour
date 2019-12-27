@@ -20,25 +20,32 @@
               :to="this.$route == '/' ? '#about' : '/'"
               v-scroll-to="'#about'"
               text
-            >{{$t("navigation.about")}}</router-link>
-            <router-link class="elevation-0" :to="`/tours`" text>{{$t("navigation.tours")}}</router-link>
+              >{{ $t("navigation.about") }}</router-link
+            >
+            <router-link class="elevation-0" :to="`/tours`" text>{{
+              $t("navigation.tours")
+            }}</router-link>
             <router-link
               class="elevation-0"
               :to="this.$route == '/' ? '#feedback' : '/'"
               v-scroll-to="'#feedback'"
               text
-            >{{$t("navigation.feedback")}}</router-link>
+              >{{ $t("navigation.feedback") }}</router-link
+            >
             <router-link
               class="elevation-0"
               :to="this.$route == '/' ? '#contact-us' : '/'"
               v-scroll-to="'#contact-us'"
               text
-            >{{$t("navigation.contact_us")}}</router-link>
+              >{{ $t("navigation.contact_us") }}</router-link
+            >
           </v-toolbar-items>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <LanguagePicker class="hide-on-mobile"></LanguagePicker>
-            <a href="tel:+998 90 123 45 67" class="hide-on-mobile phone-number">+998 71 252 13 35</a>
+            <a href="tel:+998 90 123 45 67" class="hide-on-mobile phone-number"
+              >+998 71 252 13 35</a
+            >
 
             <v-app-bar-nav-icon
               :ripple="false"
@@ -68,12 +75,14 @@
           class="elevation-0"
           :to="this.$route == '/' ? '#about' : '/'"
           v-scroll-to="'#about'"
-          @click.stop="drawer = false"
+          @click.stop="drawer = !drawer"
           w
         >
           <v-list-item link>
             <v-list-item-content>
-              <v-list-item-title>{{$t("navigation.about")}}</v-list-item-title>
+              <v-list-item-title>{{
+                $t("navigation.about")
+              }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </router-link>
@@ -85,7 +94,9 @@
         >
           <v-list-item link>
             <v-list-item-content>
-              <v-list-item-title>{{$t("navigation.tours")}}</v-list-item-title>
+              <v-list-item-title>{{
+                $t("navigation.tours")
+              }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </router-link>
@@ -97,7 +108,9 @@
         >
           <v-list-item link>
             <v-list-item-content>
-              <v-list-item-title>{{$t("navigation.contact_us")}}</v-list-item-title>
+              <v-list-item-title>{{
+                $t("navigation.contact_us")
+              }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </router-link>
@@ -109,10 +122,14 @@
         >
           <v-list-item link>
             <v-list-item-content>
-              <v-list-item-title>{{$t("navigation.feedback")}}</v-list-item-title>
+              <v-list-item-title>{{
+                $t("navigation.feedback")
+              }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </router-link>
+
+        <LanguagePicker></LanguagePicker>
       </v-list>
     </v-navigation-drawer>
   </div>
@@ -147,6 +164,12 @@
   margin-right: 0 !important;
   margin-left: 12px;
 }
+
+.v-navigation-drawer__content {
+  a {
+    text-decoration: none;
+  }
+}
 </style>
 
 <script>
@@ -170,6 +193,11 @@ export default {
       ],
       drawer: null
     };
+  },
+  methods: {
+    reloadPage() {
+      this.$router.go();
+    }
   }
 };
 </script>

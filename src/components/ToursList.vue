@@ -2,31 +2,56 @@
   <v-container id="tours">
     <section class="tours">
       <div class="section-header d-flex justify-space-between mb-12">
-        <h3 class="section-title">: {{$t("navigation.tours")}}</h3>
+        <h3 class="section-title">: {{ $t("navigation.tours") }}</h3>
         <router-link to="/tours">
-          <span>all tours</span>
+          <span
+            >{{
+              $i18n.locale == "en"
+                ? "all tours "
+                : $i18n.locale == "ru"
+                ? "все туры "
+                : "tüm turlar"
+            }}
+          </span>
           <img src="../assets/icons/arrow-point-to-right.svg" alt />
         </router-link>
       </div>
       <div class="tour-cards">
         <v-row>
-          <v-col cols="12" sm="6" md="4" lg="4" v-for="(item,i) in tours" :key="i">
+          <v-col
+            cols="12"
+            sm="6"
+            md="4"
+            lg="4"
+            v-for="(item, i) in tours"
+            :key="i"
+          >
             <div class="tour-card" v-if="i < 3">
               <router-link :to="`/tours/${item.id}`">
                 <div class="tour-card__img">
                   <img :src="item.data.image.url" alt />
                 </div>
                 <div class="tour-card__desc">
-                  <p class="tour-card__title">{{item.data.name[0].text}}</p>
+                  <p class="tour-card__title">{{ item.data.name[0].text }}</p>
 
                   <v-row class="tour-card__additional justify-space-around">
                     <v-col class="py-1" cols="6">
-                      <strong>{{$t("tour_item.header.duration") + ": "}}</strong>
-                      {{ item.data.duration}}
+                      <strong>{{
+                        $t("tour_item.header.duration") + ": "
+                      }}</strong>
+                      {{ item.data.duration }}
                     </v-col>
                     <v-col class="py-1" cols="6">
-                      <strong>{{$t("tour_item.header.price") + ":"}}</strong>
-                      {{$i18n.locale == "en" ? "from " : $i18n.locale == "ru" ? "от " : ""}} {{ "$" + item.data.price}} {{$i18n.locale == 'tr' ? "'dan başlayan" : ''}}
+                      <strong>{{ $t("tour_item.header.price") + ":" }}</strong>
+                      {{
+                        $i18n.locale == "en"
+                          ? "from "
+                          : $i18n.locale == "ru"
+                          ? "от "
+                          : ""
+                      }}
+                      {{ "$" + item.data.price }}
+                      {{ $i18n.locale == "tr" ? "'dan başlayan" : "" }}
                     </v-col>
                   </v-row>
                 </div>
@@ -124,7 +149,7 @@ export default {
         .query(this.$prismic.Predicates.at("document.type", "tour"), {
           lang: this.currentLang
         })
-        .then(response => {
+        .then((response) => {
           console.log(response);
           this.tours = JSON.parse(JSON.stringify(response.results));
           this.loading = false;

@@ -1,24 +1,46 @@
 <template>
-  <div class="dropdown">
-    <v-menu bottom :offset-y="true" left>
-      <template v-slot:activator="{ on }">
-        <v-btn dark v-on="on" :ripple="false">
-          {{
-          currentLanguage == "tr"
-          ? "türkçe"
-          : currentLanguage == "en"
-          ? "english"
-          : "русский"
-          }}
-        </v-btn>
-      </template>
+  <div>
+    <div class="dropdown hide-on-mobile">
+      <v-menu bottom :offset-y="true" left>
+        <template v-slot:activator="{ on }">
+          <v-btn dark v-on="on" :ripple="false">
+            {{
+            currentLanguage == "tr"
+            ? "türkçe"
+            : currentLanguage == "en"
+            ? "english"
+            : "русский"
+            }}
+          </v-btn>
+        </template>
 
+        <v-list>
+          <v-list-item
+            v-for="(lang, index) in getOtherLanguage"
+            :key="index"
+            v-on:click="changeLanguage(lang)"
+            class="lang-btn"
+          >
+            <img class="lang" v-if="lang == 'en'" src="../assets/icons/en.svg" alt />
+            <img class="lang" v-if="lang == 'ru'" src="../assets/icons/ru.svg" alt />
+            <img class="lang" v-if="lang == 'tr'" src="../assets/icons/tr.svg" alt />
+            <v-list-item-title>
+              {{
+              lang == "tr" ? "türkçe" : lang == "en" ? "english" : "русский"
+              }}
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </div>
+    <div class="radioLang show-on-mobile">
       <v-list>
         <v-list-item
-          v-for="(lang, index) in getOtherLanguage"
+          v-for="(lang, index) in getAllLanguage"
           :key="index"
           v-on:click="changeLanguage(lang)"
           class="lang-btn"
+          :class="{active: currentLanguage == lang}"
         >
           <img class="lang" v-if="lang == 'en'" src="../assets/icons/en.svg" alt />
           <img class="lang" v-if="lang == 'ru'" src="../assets/icons/ru.svg" alt />
@@ -30,7 +52,7 @@
           </v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-menu>
+    </div>
   </div>
 </template>
 <script>
@@ -54,6 +76,9 @@ export default {
         case "tr":
           return ["en", "ru"];
       }
+    },
+    getAllLanguage() {
+      return ["en", "ru", "tr"];
     }
   },
   methods: {
@@ -133,6 +158,10 @@ export default {
 .lang {
   width: 24px;
   margin-right: 8px;
+}
+
+.radioLang .active {
+  background: #432a49;
 }
 /* 
 .dropdown-content a:active .dropdown-content {
