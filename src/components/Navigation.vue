@@ -71,7 +71,7 @@
         </router-link>
         <router-link
           class="elevation-0"
-          :to="`/tours`"
+          :to="`/golden-chain`"
           v-scroll-to="'#about'"
           @click.stop="drawer = false"
         >
@@ -85,12 +85,7 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
-        <router-link
-          class="elevation-0"
-          :to="this.$route == '/' ? '#about' : '/'"
-          v-scroll-to="'#about'"
-          @click.stop="drawer = false"
-        >
+        <router-link class="elevation-0" :to="'/contact'" @click.stop="drawer = false">
           <v-list-item link>
             <v-list-item-content>
               <v-list-item-title>
@@ -103,8 +98,8 @@
         </router-link>
         <router-link
           class="elevation-0"
-          :to="this.$route == '/' ? '#about' : '/'"
-          v-scroll-to="'#about'"
+          :to="this.$route == '/' ? '#feedback' : '/'"
+          v-scroll-to="'#feedback'"
           @click.stop="drawer = false"
         >
           <v-list-item link>
