@@ -66,6 +66,16 @@ export default {
     sendBtn: "send"
   },
 
+  contacts: {
+    info_title: "Contact Information",
+    message_title: "Send us a message",
+    address: "Bukhara street 26, Tashkent Asiatour 100123, Uzbekistan"
+  },
+
+  gallery: {
+    title: "Gallery"
+  },
+
   tours: {
     all_tours: "All tours",
     btn: "details",

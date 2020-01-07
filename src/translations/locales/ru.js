@@ -66,6 +66,16 @@ export default {
     sendBtn: "отправить"
   },
 
+  contacts: {
+    info_title: "Контактная информация",
+    message_title: "Отправьте нам сообщение",
+    address: "Ул. Бухара, 26, Ташкент, Азиатур 100123, Узбекистан"
+  },
+
+  gallery: {
+    title: "Галлерея"
+  },
+
   tours: {
     all_tours: "Все туры",
     btn: "детали",

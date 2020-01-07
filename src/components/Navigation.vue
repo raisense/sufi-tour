@@ -134,13 +134,14 @@
   a {
     text-transform: lowercase;
     font-weight: normal;
+    font-size: 14px;
     color: #fff;
     text-decoration: none;
     position: relative;
     cursor: pointer;
 
     &:not(:last-child) {
-      margin-right: 24px;
+      margin-right: 32px;
     }
   }
   a.router-link-active:before {

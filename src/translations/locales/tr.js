@@ -66,12 +66,22 @@ export default {
     sendBtn: "gönder"
   },
 
+  contacts: {
+    info_title: "Iletişim bilgileri",
+    message_title: "Bize mesaj gönder",
+    address: "Buhara street 26, Taşkent Asiatour 100123, Özbekistan"
+  },
+
   tours: {
     all_tours: "Tüm turlar",
     btn: "ayrıntılar",
     duration: "süre",
     price: "fiyat",
     more: "daha fazlasını gör"
+  },
+
+  gallery: {
+    title: "Galeri"
   },
 
   tour_item: {

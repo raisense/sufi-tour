@@ -8,38 +8,38 @@
         <v-row>
           <v-col cols="12" sm="6" md="4" lg="4" v-for="(item, i) in tours" :key="i">
             <div class="tour-card" v-if="i < 6">
-              <div class="tour-card__img">
-                <img :src="item.data.image.url" alt />
-                <div class="tour-link">
-                  <router-link :to="`/tours/${item.id}`">Details</router-link>
+              <router-link :to="`/tours/${item.id}`">
+                <div class="tour-card__img">
+                  <img :src="item.data.image.url" alt />
+                  <!-- <div class="tour-link">Details</div> -->
                 </div>
-              </div>
-              <div class="tour-card__desc">
-                <p class="tour-card__title">{{ item.data.name[0].text }}</p>
+                <div class="tour-card__desc">
+                  <p class="tour-card__title">{{ item.data.name[0].text }}</p>
 
-                <v-row class="tour-card__additional justify-space-around">
-                  <v-col class="py-1" cols="6">
-                    <strong>
+                  <v-row class="tour-card__additional justify-space-around">
+                    <v-col class="py-1" cols="6">
+                      <strong>
+                        {{
+                        $t("tour_item.header.duration") + ": "
+                        }}
+                      </strong>
+                      {{ item.data.duration }}
+                    </v-col>
+                    <v-col class="py-1" cols="6">
+                      <strong>{{ $t("tour_item.header.price") + ":" }}</strong>
                       {{
-                      $t("tour_item.header.duration") + ": "
+                      $i18n.locale == "en"
+                      ? "from "
+                      : $i18n.locale == "ru"
+                      ? "от "
+                      : ""
                       }}
-                    </strong>
-                    {{ item.data.duration }}
-                  </v-col>
-                  <v-col class="py-1" cols="6">
-                    <strong>{{ $t("tour_item.header.price") + ":" }}</strong>
-                    {{
-                    $i18n.locale == "en"
-                    ? "from "
-                    : $i18n.locale == "ru"
-                    ? "от "
-                    : ""
-                    }}
-                    {{ "$" + item.data.price }}
-                    {{ $i18n.locale == "tr" ? "'dan başlayan" : "" }}
-                  </v-col>
-                </v-row>
-              </div>
+                      {{ "$" + item.data.price }}
+                      {{ $i18n.locale == "tr" ? "'dan başlayan" : "" }}
+                    </v-col>
+                  </v-row>
+                </div>
+              </router-link>
             </div>
           </v-col>
         </v-row>
@@ -77,18 +77,18 @@
     border-radius: 10px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 
+    a {
+      text-decoration: none;
+      color: #432a49;
+    }
     &:hover {
-      a {
-        text-decoration: none;
-      }
-
       .tour-link {
         opacity: 1 !important;
         transition: 0.4s all ease;
       }
 
       .tour-card__img img {
-        filter: blur(10px);
+        // filter: blur(10px);
         transform: scale(1.1);
         transition: 0.4s all ease;
       }
@@ -189,7 +189,6 @@ export default {
   },
   watch: {
     currentLang(newValue) {
-      console.log("language changed to " + newValue);
       this.getAllTours();
     }
   },

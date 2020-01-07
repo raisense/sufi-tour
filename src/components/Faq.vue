@@ -101,6 +101,15 @@ input {
   background-color: #fff !important;
   padding: 32px 48px;
 }
+.v-expansion-panel-header {
+  font-weight: normal;
+  font-size: 14px;
+}
+.v-expansion-panel {
+  font-size: 13px;
+  opacity: 0.9;
+  line-height: 20px;
+}
 
 @media screen and (max-width: 576px) {
   .v-form {

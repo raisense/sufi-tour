@@ -138,6 +138,7 @@ export default {
   z-index: 1;
 }
 .dropdown-content a {
+  font-size: 14px;
   float: none;
   color: black;
   padding: 12px 16px;
@@ -147,6 +148,10 @@ export default {
 }
 .dropdown-content a:hover {
   background-color: #ddd;
+}
+
+.v-list-item__title {
+  font-size: 14px;
 }
 
 .lang-btn {

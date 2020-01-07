@@ -3,9 +3,7 @@
     <v-parallax height="400" class="tours-parallax" src="../assets/bg-2.png">
       <v-row align="center" justify="center">
         <v-col class="text-center" cols="12">
-          <h1 class="display-1 font-weight-bold mb-4">Golden Chain</h1>
-
-          <div class="tour-date">group travels across uzbekistan</div>
+          <h1 class="display-1 font-weight-bold mb-4">{{$t('navigation.about')}}</h1>
         </v-col>
       </v-row>
     </v-parallax>

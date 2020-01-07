@@ -4,7 +4,7 @@
       <v-parallax height="400" class="tours-parallax" :src="image.url">
         <v-row align="center" justify="center">
           <v-col class="text-center" cols="12">
-            <h1 class="display-1 font-weight-bold mb-4">{{ name }}</h1>
+            <h1 class="display-4 font-weight-bold mb-4">{{ name }}</h1>
 
             <div class="tour-date">{{ duration }}</div>
           </v-col>
@@ -174,12 +174,12 @@
               </swiper>
               <div v-for="(item, i) in slices" :key="i" class="tour-single hide-on-mobile">
                 <v-row>
-                  <v-col cols="4">
+                  <v-col cols="3">
                     <div class="tour-single-img">
                       <img :src="item.primary.image_banner.url" alt />
                     </div>
                   </v-col>
-                  <v-col cols="8">
+                  <v-col cols="9">
                     <div class="tour-single-title d-flex">
                       <div>
                         <div class="day-label">{{ $t("tour_item.header.day") }}:</div>
@@ -368,6 +368,12 @@ input {
   z-index: 2;
 }
 
+.tour-single-title {
+  h3 {
+    font-size: 24px;
+  }
+}
+
 .duration-label,
 .price-label {
   font-size: 14px;
@@ -533,25 +539,26 @@ input {
 
     .tour-single-desc {
       padding-right: 2rem;
+      font-size: 14px !important;
     }
 
     .tour-single-title {
       font-weight: bold;
-      font-size: 42px;
 
       h3 {
+        font-size: 24px !important;
         padding-left: 12px;
         margin-top: 5px;
       }
     }
 
     .day-label {
-      font-size: 16px;
+      font-size: 13px;
     }
 
     .day-number {
       color: #63d66e;
-      font-size: 32px;
+      font-size: 24px;
     }
 
     .scroll-area {
@@ -559,7 +566,7 @@ input {
     }
 
     .services-title {
-      color: #878ac6;
+      color: #432a49;
       margin: 12px 0;
       text-align: left !important;
     }
@@ -569,10 +576,10 @@ input {
     }
 
     .included-services {
+      padding-left: 24px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      align-items: center;
       width: 50%;
 
       .included-item {
@@ -588,7 +595,7 @@ input {
         &:before {
           content: url("../assets/icons/tick-inside-circle.svg");
           font-size: 24px;
-          color: #878ac6;
+          color: #432a49;
           width: 18px;
           height: 18px;
           position: absolute;
@@ -599,11 +606,11 @@ input {
     }
 
     .not-included-services {
+      padding-left: 24px;
       margin: 0 auto;
       width: 50%;
       display: flex;
       flex-direction: column;
-      align-items: center;
 
       .not-included-item {
         text-align: left;

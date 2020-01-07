@@ -3,9 +3,7 @@
     <v-parallax height="400" class="tours-parallax" src="../assets/bg-2.png">
       <v-row align="center" justify="center">
         <v-col class="text-center" cols="12">
-          <h1 class="display-1 font-weight-bold mb-4">Contact Us</h1>
-
-          <div class="tour-date">group travels across uzbekistan</div>
+          <h1 class="display-1 font-weight-bold mb-4">{{$t('navigation.contact_us')}}</h1>
         </v-col>
       </v-row>
     </v-parallax>
@@ -13,9 +11,10 @@
       <div class="contact-content my-4">
         <v-row>
           <v-col class="green-bg">
-            <h1 class="mb-4">Contact information</h1>
+            <h1 class="my-4">{{$t('contacts.info_title')}}</h1>
             <div class="adress-info mb-4">
-              <img src="../assets/icons/placeholder-filled-point.svg" width="18" alt /> Bukhara street 26, Tashkent Asiatour 100123, Uzbekistan
+              <img src="../assets/icons/placeholder-filled-point.svg" width="18" alt />
+              {{$t('contacts.address')}}
             </div>
             <div class="phone-info mb-4">
               <img src="../assets/icons/telephone.svg" width="18" alt />+ 998 71 252 1335
@@ -46,7 +45,7 @@
           </v-col>
           <v-col class="right-form">
             <v-form>
-              <h1>Send Us A Message</h1>
+              <h1 class="my-4">{{$t('contacts.message_title')}}</h1>
               <p>{{ $t("tour_item.form.subtitle") }}</p>
               <form action="https://formspree.io/xknondeb" method="post">
                 <v-row>
@@ -89,7 +88,9 @@
   overflow: hidden;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 
+  font-size: 14px;
   input {
+    font-size: 14px;
     border: 1px solid #e4e4e4;
     width: 80%;
   }
