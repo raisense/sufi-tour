@@ -3,6 +3,7 @@ export default {
     about: "golden chain",
     tours: "tours",
     feedback: "feedback",
+    gallery: "gallery",
     contact_us: "contact us"
   },
   heroContent: {

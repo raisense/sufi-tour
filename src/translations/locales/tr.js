@@ -3,6 +3,7 @@ export default {
     about: "altın silsile",
     tours: "turlar",
     feedback: "yorumlar",
+    gallery: "galeri",
     contact_us: "bize ulaşın"
   },
   heroContent: {

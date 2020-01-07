@@ -11,7 +11,7 @@
         </v-row>
       </v-parallax>
 
-      <div class="tour-item-about">
+      <!-- <div class="tour-item-about">
         <v-container>
           <v-sheet
             v-if="loading"
@@ -62,7 +62,7 @@
             </button>
           </div>
         </v-container>
-      </div>
+      </div>-->
       <v-container>
         <div class="tour-big-details">
           <div class="tour-header">
@@ -73,17 +73,17 @@
               </v-col>
               <v-col>
                 <strong>{{ $t("tour_item.header.price") }}:</strong>
-                <span
-                  >{{
-                    $i18n.locale == "en"
-                      ? "from "
-                      : $i18n.locale == "ru"
-                      ? "от "
-                      : ""
+                <span>
+                  {{
+                  $i18n.locale == "en"
+                  ? "from "
+                  : $i18n.locale == "ru"
+                  ? "от "
+                  : ""
                   }}
                   $ {{ price }}
-                  {{ $i18n.locale == "tr" ? "'dan başlayan" : "" }}</span
-                >
+                  {{ $i18n.locale == "tr" ? "'dan başlayan" : "" }}
+                </span>
               </v-col>
               <v-col>
                 <strong>{{ $t("tour_item.header.duration") }}:</strong>
@@ -108,10 +108,7 @@
               </div>
             </div>
             <div>
-              <swiper
-                :options="swiperOption"
-                class="tour-single-swiper show-on-mobile mt-6"
-              >
+              <swiper :options="swiperOption" class="tour-single-swiper show-on-mobile mt-6">
                 <swiper-slide v-for="(item, i) in slices" :key="i">
                   <v-row>
                     <v-col cols="12">
@@ -122,29 +119,19 @@
                     <v-col cols="12">
                       <div class="tour-single-title d-flex">
                         <div>
-                          <div class="day-label">
-                            {{ $t("tour_item.header.day") }}:
-                          </div>
-                          <div class="day-number">
-                            0{{ item.primary.day_number }}
-                          </div>
+                          <div class="day-label">{{ $t("tour_item.header.day") }}:</div>
+                          <div class="day-number">0{{ item.primary.day_number }}</div>
                         </div>
                         <h3>{{ item.primary.destination_name[0].text }}</h3>
                       </div>
-                      <div class="tour-single-desc">
-                        {{ item.primary.description[0].text }}
-                      </div>
+                      <div class="tour-single-desc">{{ item.primary.description[0].text }}</div>
                     </v-col>
                   </v-row>
                 </swiper-slide>
                 <div class="swiper-button-prev" slot="button-prev"></div>
                 <div class="swiper-button-next" slot="button-next"></div>
               </swiper>
-              <div
-                v-for="(item, i) in slices"
-                :key="i"
-                class="tour-single hide-on-mobile"
-              >
+              <div v-for="(item, i) in slices" :key="i" class="tour-single hide-on-mobile">
                 <v-row>
                   <v-col cols="5">
                     <div class="tour-single-img">
@@ -154,57 +141,45 @@
                   <v-col cols="7">
                     <div class="tour-single-title d-flex">
                       <div>
-                        <div class="day-label">
-                          {{ $t("tour_item.header.day") }}:
-                        </div>
-                        <div class="day-number">
-                          0{{ item.primary.day_number }}
-                        </div>
+                        <div class="day-label">{{ $t("tour_item.header.day") }}:</div>
+                        <div class="day-number">0{{ item.primary.day_number }}</div>
                       </div>
                       <h3>{{ item.primary.destination_name[0].text }}</h3>
                     </div>
-                    <div class="tour-single-desc">
-                      {{ item.primary.description[0].text }}
-                    </div>
+                    <div class="tour-single-desc">{{ item.primary.description[0].text }}</div>
                   </v-col>
                 </v-row>
               </div>
 
-              <h4 class="included-services-title text-center">
-                {{ $t("tour_item.header.included.title") }}:
-              </h4>
+              <h4
+                class="included-services-title text-center"
+              >{{ $t("tour_item.header.included.title") }}:</h4>
               <div class="included-services d-flex align-start justify-center">
                 <div class="included-item">
                   <div class="included-item__img">
                     <img src="../assets/icons/hotel-blue.svg" alt />
                   </div>
-                  <div class="included-item__desc">
-                    {{ $t("tour_item.header.included.hotels") }}
-                  </div>
+                  <div class="included-item__desc">{{ $t("tour_item.header.included.hotels") }}</div>
                 </div>
                 <div class="included-item">
                   <div class="included-item__img">
                     <img src="../assets/icons/flight-blue.svg" alt />
                   </div>
-                  <div class="included-item__desc">
-                    {{ $t("tour_item.header.included.flight") }}
-                  </div>
+                  <div class="included-item__desc">{{ $t("tour_item.header.included.flight") }}</div>
                 </div>
                 <div class="included-item">
                   <div class="included-item__img">
                     <img src="../assets/icons/food-blue.svg" alt />
                   </div>
-                  <div class="included-item__desc">
-                    {{ $t("tour_item.header.included.food") }}
-                  </div>
+                  <div class="included-item__desc">{{ $t("tour_item.header.included.food") }}</div>
                 </div>
                 <div class="included-item">
                   <div class="included-item__img">
                     <img src="../assets/icons/transport-blue.svg" alt />
                   </div>
-                  <div class="included-item__desc">
-                    {{ $t("tour_item.header.included.transportation") }}
-                  </div>
+                  <div
+                    class="included-item__desc"
+                  >{{ $t("tour_item.header.included.transportation") }}</div>
                 </div>
               </div>
             </div>
@@ -219,27 +194,12 @@
           <p>{{ $t("tour_item.form.subtitle") }}</p>
           <form action="https://formspree.io/xknondeb" method="post">
             <v-row>
-              <input
-                type="text"
-                style="display: none"
-                name="tour-name"
-                :value="name"
-              />
+              <input type="text" style="display: none" name="tour-name" :value="name" />
               <v-col cols="12">
-                <input
-                  type="text"
-                  name="name"
-                  :placeholder="$t('inputs.nameInput')"
-                  required
-                />
+                <input type="text" name="name" :placeholder="$t('inputs.nameInput')" required />
               </v-col>
               <v-col cols="12">
-                <input
-                  type="email"
-                  name="email"
-                  :placeholder="$t('inputs.emailInput')"
-                  required
-                />
+                <input type="email" name="email" :placeholder="$t('inputs.emailInput')" required />
               </v-col>
               <v-col cols="12">
                 <input
@@ -250,9 +210,7 @@
                 />
               </v-col>
               <v-col cols="12">
-                <button class="custom custom-success" type="submit">
-                  {{ $t("inputs.sendBtn") }}
-                </button>
+                <button class="custom custom-success" type="submit">{{ $t("inputs.sendBtn") }}</button>
               </v-col>
             </v-row>
           </form>
@@ -293,6 +251,8 @@ export default {
       arrival: null,
       departure: null,
       color: null,
+      included: null,
+      not_included: null,
       slices: [],
       alternativeLang: [],
       swiperOption: {
@@ -315,7 +275,7 @@ export default {
         .query(this.$prismic.Predicates.at("document.id", id), {
           lang: "*"
         })
-        .then((response) => {
+        .then(response => {
           const data = response.results[0].data;
 
           this.name = data.name[0].text;
@@ -330,7 +290,8 @@ export default {
           this.color = data.tour_color;
           this.slices = data.body;
           this.alternativeLang = response.results[0].alternate_languages;
-          console.log(this.alternativeLang);
+          this.included = data.included_list;
+          this.not_included = data.not_included_list;
         });
 
       this.loading = false;
@@ -338,7 +299,7 @@ export default {
   },
   watch: {
     currentLang(newValue) {
-      this.alternativeLang.map((el) => {
+      this.alternativeLang.map(el => {
         if (el.lang == newValue) {
           this.getTour(el.id);
         }

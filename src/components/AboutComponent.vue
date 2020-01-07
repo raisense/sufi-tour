@@ -1,38 +1,31 @@
 <template>
-  <v-container id="about">
-    <section class="about-list full-section py-12">
-      <div class="section-header d-flex justify-space-between mb-n8">
-        <h3 class="section-title">: {{ $t("navigation.about") }}</h3>
+  <div class="about-content">
+    <h1 class="loader text-center" v-if="loading == true">
+      <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
+    </h1>
+    <div class="tour-single" v-if="loading != true">
+      <div class="about-item">
+        <div class="about-item__details">
+          <p class="about-item__title">{{ item.data.title[0].text }}</p>
 
-      <swiper :options="swiperOption" class="tour-single">
-        <swiper-slide v-for="(item, i) in sortedList" :key="i">
-          <div class="about-item">
-            <div class="about-item__details pr-12">
-              <p class="about-item__title">{{ item.data.title[0].text }}</p>
-              <div id="scroll-area">
-                <smooth-scrollbar class="pr-6">
-                  <richtext :desc="item.data.description"></richtext>
-                </smooth-scrollbar>
-              </div>
-            </div>
-
-            <div class="about-item__image">
-              <img :src="item.data.image.url" alt />
-            </div>
+          <richtext :desc="item.data.description"></richtext>
+          <div class="about-item__image">
+            <img :src="item.data.image.url" alt />
           </div>
-        </swiper-slide>
-        <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>
-      </swiper>
-    </section>
-  </v-container>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import "swiper/dist/css/swiper.css";
 import Vue from "vue";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
 
 Vue.component("richtext", {
   props: ["desc"],
@@ -41,7 +34,7 @@ Vue.component("richtext", {
     if (self.desc.length > 0) {
       return createElement(
         "div",
-        self.desc.map((el) => {
+        self.desc.map(el => {
           return createElement("p", el.text);
         })
       );
@@ -50,22 +43,14 @@ Vue.component("richtext", {
 });
 
 export default {
-  components: {
-    swiper,
-    swiperSlide
-  },
+  props: ["itemId"],
+
   data() {
     return {
-      aboutItems: [],
-      swiperOption: {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        // simulateTouch: false,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
-      }
+      loading: false,
+      currentItem: null,
+      item: [],
+      id: this.itemId
     };
   },
   computed: {
@@ -73,51 +58,54 @@ export default {
       if (this.$store.state.language.language == "en") {
         return "en-us";
       } else return this.$store.state.language.language;
-    },
-
-    sortedList() {
-      return _.orderBy(this.aboutItems, "data.order");
     }
+
+    // sortedList() {
+    //   return _.orderBy(this.tems, "data.order");
+    // }
   },
   methods: {
-    getAbout() {
+    getItem() {
+      this.loading = true;
       this.$prismic.client
-        .query(this.$prismic.Predicates.at("document.type", "about"), {
+        .query(this.$prismic.Predicates.at("document.id", this.itemId), {
           lang: this.currentLang
         })
-        .then((response) => {
-          this.aboutItems = response.results;
-          console.log(response);
+        .then(response => {
+          this.item = response.results[0];
+          console.log(this.item);
+          this.loading = false;
         });
     }
   },
   watch: {
     currentLang(newValue) {
-      this.getAbout();
-    }
-  },
+      this.getItem();
+    },
 
-  created() {
-    this.getAbout();
+    itemId(newValue) {
+      this.getItem();
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-#scroll-area {
-  height: 500px;
-
-  .scroll-content {
-    padding-right: 24px;
-  }
+.loader {
+  position: sticky;
+  top: 100px;
 }
 
+.about-content {
+  margin-left: 32px;
+  width: 70%;
+}
 .about-item {
   color: #432a49;
   display: flex;
 
   .about-item__details {
-    width: 50%;
+    width: 100%;
   }
 
   .about-item__title {
@@ -128,9 +116,10 @@ export default {
 }
 
 .about-item__image {
-  width: 50%;
+  width: 100%;
   border-radius: 15px;
   overflow: hidden;
+  margin-bottom: 16px;
 }
 .about-item__image img {
   width: 100%;
@@ -165,12 +154,17 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
+  .about-content {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
   .about-item {
     flex-direction: column-reverse;
   }
   .about-item__details,
   .about-item__image {
     width: 100% !important;
+    padding-right: 0 !important;
   }
 
   .about-item__image {

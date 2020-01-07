@@ -1,16 +1,15 @@
 <template>
   <div class="home">
     <Hero></Hero>
-    <About></About>
+    <!-- <About></About> -->
     <Tours></Tours>
-    <WhyUs></WhyUs>
     <v-container>
       <section class="feedback-faq" id="feedback">
-        <div class="section-header d-flex justify-space-between mb-4">
-          <h3 class="section-title">: {{$t('navigation.feedback')}}</h3>
-        </div>
         <v-row>
           <v-col xs="12" sm="6" md="5" lg="5">
+            <div class="section-header d-flex justify-space-between mb-4">
+              <h3 class="section-title">: {{$t('navigation.feedback')}}</h3>
+            </div>
             <Feedback></Feedback>
           </v-col>
           <v-col xs="12" sm="6" md="7" lg="7" class="pl-md-12">
@@ -19,6 +18,7 @@
         </v-row>
       </section>
     </v-container>
+    <WhyUs></WhyUs>
   </div>
 </template>
 

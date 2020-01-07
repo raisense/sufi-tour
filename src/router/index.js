@@ -8,32 +8,23 @@ import { i18n } from "../plugins/i18n.js";
 Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   path: "/",
-  //   redirect: `/${i18n.locale}`
-  // },
-  // {
-  //   path: "/:lang",
-  //   component: {
-  //     render(c) {
-  //       return c("router-view");
-  //     }
-  //   },
-  //   children: [
   {
     path: "/",
     name: "home",
     component: Home
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: "/golden-chain",
+    name: "golden-chain",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import(/* webpackChunkName: "golden-chain" */ "../views/GoldenChain.vue")
   },
+  // {
+  //   path: "/golden-chain/:id",
+  //   name: "golden-chain-item",
+  //   component: () =>
+  //     import(/* webpackChunkName: "golden-chain" */ "../views/GoldenChain.vue")
+  // },
   {
     path: "/tours",
     name: "tours",
@@ -44,7 +35,20 @@ const routes = [
     path: "/tours/:id",
     name: "tour-item",
     component: ToursItem
+  },
+  {
+    path: "/gallery",
+    name: "gallery",
+    component: () =>
+      import(/* webpackChunkName: "gallery" */ "../views/Gallery.vue")
+  },
+  {
+    path: "/contact",
+    name: "contact",
+    component: () =>
+      import(/* webpackChunkName: "contact" */ "../views/Contact.vue")
   }
+
   //   ]
   // }
 ];

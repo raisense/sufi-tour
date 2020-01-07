@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="transparent" absolute class="elevation-0" dark>
+    <v-app-bar app class="elevation-0" dark>
       <v-container class="py-0">
         <div class="d-flex">
           <router-link :to="`/`">
@@ -15,37 +15,24 @@
           </router-link>
           <v-spacer></v-spacer>
           <v-toolbar-items class="hide-on-mobile">
-            <router-link
-              class="elevation-0"
-              :to="this.$route == '/' ? '#about' : '/'"
-              v-scroll-to="'#about'"
-              text
-              >{{ $t("navigation.about") }}</router-link
-            >
-            <router-link class="elevation-0" :to="`/tours`" text>{{
-              $t("navigation.tours")
-            }}</router-link>
+            <router-link class="elevation-0" :to="`/golden-chain`" text>{{ $t("navigation.about") }}</router-link>
+            <router-link class="elevation-0" :to="`/gallery`" text>
+              {{
+              $t("navigation.gallery")
+              }}
+            </router-link>
             <router-link
               class="elevation-0"
               :to="this.$route == '/' ? '#feedback' : '/'"
               v-scroll-to="'#feedback'"
               text
-              >{{ $t("navigation.feedback") }}</router-link
-            >
-            <router-link
-              class="elevation-0"
-              :to="this.$route == '/' ? '#contact-us' : '/'"
-              v-scroll-to="'#contact-us'"
-              text
-              >{{ $t("navigation.contact_us") }}</router-link
-            >
+            >{{ $t("navigation.feedback") }}</router-link>
+            <router-link class="elevation-0" to="contact" text>{{ $t("navigation.contact_us") }}</router-link>
           </v-toolbar-items>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <LanguagePicker class="hide-on-mobile"></LanguagePicker>
-            <a href="tel:+998 90 123 45 67" class="hide-on-mobile phone-number"
-              >+998 93 184 83 93</a
-            >
+            <a href="tel:+998 90 123 45 67" class="hide-on-mobile phone-number">+998 93 184 83 93</a>
 
             <v-app-bar-nav-icon
               :ripple="false"
@@ -71,17 +58,14 @@
       <v-divider></v-divider>
 
       <v-list dense nav>
-        <router-link
-          class="elevation-0"
-          :to="this.$route == '/' ? '#about' : '/'"
-          v-scroll-to="'#about'"
-          @click="drawer = !drawer"
-        >
+        <router-link class="elevation-0" :to="`/golden-chain`">
           <v-list-item link>
             <v-list-item-content>
-              <v-list-item-title>{{
+              <v-list-item-title>
+                {{
                 $t("navigation.about")
-              }}</v-list-item-title>
+                }}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </router-link>
@@ -93,9 +77,11 @@
         >
           <v-list-item link>
             <v-list-item-content>
-              <v-list-item-title>{{
-                $t("navigation.tours")
-              }}</v-list-item-title>
+              <v-list-item-title>
+                {{
+                $t("navigation.gallery")
+                }}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </router-link>
@@ -107,9 +93,11 @@
         >
           <v-list-item link>
             <v-list-item-content>
-              <v-list-item-title>{{
+              <v-list-item-title>
+                {{
                 $t("navigation.contact_us")
-              }}</v-list-item-title>
+                }}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </router-link>
@@ -121,9 +109,11 @@
         >
           <v-list-item link>
             <v-list-item-content>
-              <v-list-item-title>{{
+              <v-list-item-title>
+                {{
                 $t("navigation.feedback")
-              }}</v-list-item-title>
+                }}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </router-link>
@@ -135,6 +125,11 @@
 </template>
 
 <style lang="scss" scoped>
+.v-app-bar {
+  position: static;
+  background-color: #432a49;
+}
+
 .v-toolbar__items {
   a {
     text-transform: lowercase;

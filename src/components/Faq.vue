@@ -89,6 +89,14 @@ input {
   border: 1px solid rgb(204, 204, 204);
 }
 
+.v-expansion-panel {
+  border: 1px solid rgba(67, 42, 73, 0.2);
+}
+
+.v-expansion-panel::before {
+  box-shadow: none;
+}
+
 .v-form {
   background-color: #fff !important;
   padding: 32px 48px;

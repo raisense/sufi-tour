@@ -1,11 +1,11 @@
 <template>
   <!-- <div class="hero"> -->
-  <v-parallax class="hero" src="../assets/hero-img.png">
+  <v-parallax class="hero" src="../assets/uzbekistan-7.jpg">
     <div class="hero-content">
       <h1 class="hero-title">{{$t("heroContent.title")}}</h1>
       <h5 class="hero-subtitle">{{$t("heroContent.subtitle")}}</h5>
 
-      <div class="counters mt-12 d-flex justify-space-between">
+      <!-- <div class="counters mt-12 d-flex justify-space-between">
         <div class="counter-item text-center">
           <div class="counter-item__number">1327+</div>
           <div class="counter-item__text">{{$t("heroContent.counters.one")}}</div>
@@ -22,7 +22,7 @@
       <div class="scroll-btn">
         <a href="#" v-scroll-to="'#tours'">{{$t("heroContent.scrollText")}}</a>
         <div class="icon-scroll"></div>
-      </div>
+      </div>-->
     </div>
   </v-parallax>
   <!-- </div> -->
@@ -30,7 +30,8 @@
 
 <style lang="scss" scoped>
 .hero {
-  height: 100vh !important;
+  height: 350px !important;
+  margin-bottom: 64px;
 }
 
 .hero:before {

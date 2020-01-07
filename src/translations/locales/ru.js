@@ -3,6 +3,7 @@ export default {
     about: "золотая цепочка",
     tours: "туры",
     feedback: "комментарии",
+    gallery: "галлерея",
     contact_us: "свяжитесь с нами"
   },
   heroContent: {

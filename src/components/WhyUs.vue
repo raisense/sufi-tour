@@ -45,7 +45,6 @@
         </v-row>
       </div>
     </v-container>
-    <RequestComponent></RequestComponent>
   </section>
 </template>
 
