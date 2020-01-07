@@ -98,7 +98,7 @@ export default {
 
 .about-content {
   margin-left: 32px;
-  width: 70%;
+  width: 100%;
 }
 .about-item {
   color: #432a49;

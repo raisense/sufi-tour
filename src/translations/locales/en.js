@@ -89,11 +89,10 @@ export default {
       departure: "departure",
       day: "day",
       included: {
-        title: "included in price",
-        hotels: "hotels",
-        flight: "domestic flights",
-        food: "food",
-        transportation: "transportation"
+        title: "included in price"
+      },
+      not_included: {
+        title: "not included in price"
       }
     },
     form: {

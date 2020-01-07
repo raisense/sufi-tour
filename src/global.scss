@@ -137,6 +137,10 @@ input:focus {
   }
 }
 
+.v-navigation-drawer {
+  position: fixed;
+}
+
 .wrapper {
   width: 70%;
   margin: 0 auto;
@@ -224,6 +228,22 @@ input:focus {
     }
   }
 }
+
+@media screen and (min-width: 768px) {
+  .about {
+    .v-dialog__content {
+      display: none;
+    }
+  }
+// .v-overlay.v-overlay--active.theme--dark,
+// .v-overlay__scrim,
+// .theme--dark.v-overlay {
+//   display: none !important;
+// }
+
+}
+
+
 
 
 @media screen and (max-width: 768px) {

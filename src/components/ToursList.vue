@@ -7,7 +7,7 @@
       <div class="tour-cards">
         <v-row>
           <v-col cols="12" sm="6" md="4" lg="4" v-for="(item, i) in tours" :key="i">
-            <div class="tour-card" v-if="i < 3">
+            <div class="tour-card" v-if="i < 6">
               <div class="tour-card__img">
                 <img :src="item.data.image.url" alt />
                 <div class="tour-link">
@@ -107,7 +107,7 @@
 
       .tour-link {
         position: absolute;
-        z-index: 200;
+        z-index: 2;
         top: 0;
         left: 0;
         display: flex;

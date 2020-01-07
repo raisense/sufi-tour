@@ -89,11 +89,10 @@ export default {
       departure: "kalkış",
       day: "gün",
       included: {
-        title: "fiyata dahil",
-        hotels: "oteller",
-        flight: "iç hat uçuşları",
-        food: "yiyecek",
-        transportation: "ulaşım"
+        title: "fiyata dahil"
+      },
+      not_included: {
+        title: "fiyata dahil değil"
       }
     },
     form: {

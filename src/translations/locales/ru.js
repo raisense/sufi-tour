@@ -89,11 +89,10 @@ export default {
       departure: "вылет",
       day: "день",
       included: {
-        title: "включено в цену",
-        hotels: "гостиницы",
-        flight: "внутренние рейсы",
-        food: "еда",
-        transportation: "транспортировка"
+        title: "включено в цену"
+      },
+      not_included: {
+        title: "не включено в цену"
       }
     },
     form: {

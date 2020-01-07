@@ -71,7 +71,7 @@
                 <strong>{{ $t("tour_item.header.ingroup") }}:</strong>
                 <span>{{ $tc("tour_item.header.people", people) }}</span>
               </v-col>
-              <v-col>
+              <!-- <v-col>
                 <strong>{{ $t("tour_item.header.price") }}:</strong>
                 <span>
                   {{
@@ -84,7 +84,7 @@
                   $ {{ price }}
                   {{ $i18n.locale == "tr" ? "'dan başlayan" : "" }}
                 </span>
-              </v-col>
+              </v-col>-->
               <v-col>
                 <strong>{{ $t("tour_item.header.duration") }}:</strong>
                 <span>{{ duration }}</span>
@@ -93,9 +93,49 @@
                 <strong>{{ $t("tour_item.header.duration") }}:</strong>
                 <span>{{ distance }} KM</span>
               </v-col>
+              <v-col>
+                <button
+                  class="custom custom-success"
+                  @click.stop="dialog = true"
+                >{{ $t("tour_item.btn") }}</button>
+              </v-col>
             </v-row>
           </div>
           <div class="tour-big-content">
+            <v-row class="mb-6">
+              <v-col>
+                <div class="about-tour">
+                  <div class="tour-name">
+                    {{
+                    $i18n.locale == "en"
+                    ? "About "
+                    : $i18n.locale == "ru"
+                    ? "О "
+                    : ""
+                    }}
+                    {{ name }} {{ $i18n.locale == "tr" ? "hakkında" : "" }}
+                  </div>
+                  <div class="tour-desc">{{ desc }}</div>
+                </div>
+              </v-col>
+              <v-col>
+                <div class="d-flex offers-list">
+                  <div class="included-services" v-if="included">
+                    <h4 class="services-title">{{ $t("tour_item.header.included.title") }}:</h4>
+                    <div class="included-item" v-for="(item, i) in included" :key="i">
+                      <span>{{item.included_name }}</span>
+                    </div>
+                  </div>
+                  <div class="not-included-services" v-if="not_included">
+                    <h4 class="services-title">{{ $t("tour_item.header.not_included.title") }}:</h4>
+                    <div class="not-included-item" v-for="(item, i) in not_included" :key="i">
+                      <span>{{item.not_included_name }}</span>
+                    </div>
+                  </div>
+                </div>
+              </v-col>
+            </v-row>
+
             <h1 class="text-center">{{ $t("tour_item.header.roadmap") }}</h1>
             <div class="d-flex justify-space-between">
               <div class="arrival">
@@ -107,6 +147,7 @@
                 <span>{{ departure }}</span>
               </div>
             </div>
+
             <div>
               <swiper :options="swiperOption" class="tour-single-swiper show-on-mobile mt-6">
                 <swiper-slide v-for="(item, i) in slices" :key="i">
@@ -133,12 +174,12 @@
               </swiper>
               <div v-for="(item, i) in slices" :key="i" class="tour-single hide-on-mobile">
                 <v-row>
-                  <v-col cols="5">
+                  <v-col cols="4">
                     <div class="tour-single-img">
                       <img :src="item.primary.image_banner.url" alt />
                     </div>
                   </v-col>
-                  <v-col cols="7">
+                  <v-col cols="8">
                     <div class="tour-single-title d-flex">
                       <div>
                         <div class="day-label">{{ $t("tour_item.header.day") }}:</div>
@@ -149,38 +190,6 @@
                     <div class="tour-single-desc">{{ item.primary.description[0].text }}</div>
                   </v-col>
                 </v-row>
-              </div>
-
-              <h4
-                class="included-services-title text-center"
-              >{{ $t("tour_item.header.included.title") }}:</h4>
-              <div class="included-services d-flex align-start justify-center">
-                <div class="included-item">
-                  <div class="included-item__img">
-                    <img src="../assets/icons/hotel-blue.svg" alt />
-                  </div>
-                  <div class="included-item__desc">{{ $t("tour_item.header.included.hotels") }}</div>
-                </div>
-                <div class="included-item">
-                  <div class="included-item__img">
-                    <img src="../assets/icons/flight-blue.svg" alt />
-                  </div>
-                  <div class="included-item__desc">{{ $t("tour_item.header.included.flight") }}</div>
-                </div>
-                <div class="included-item">
-                  <div class="included-item__img">
-                    <img src="../assets/icons/food-blue.svg" alt />
-                  </div>
-                  <div class="included-item__desc">{{ $t("tour_item.header.included.food") }}</div>
-                </div>
-                <div class="included-item">
-                  <div class="included-item__img">
-                    <img src="../assets/icons/transport-blue.svg" alt />
-                  </div>
-                  <div
-                    class="included-item__desc"
-                  >{{ $t("tour_item.header.included.transportation") }}</div>
-                </div>
               </div>
             </div>
           </div>
@@ -337,12 +346,6 @@ input {
     height: 100%;
     object-fit: cover;
     object-position: center;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .v-form {
-    padding: 24px;
   }
 }
 
@@ -503,8 +506,14 @@ input {
   .tour-header {
     background: #432a49;
     color: #fff;
+    font-size: 14px;
     padding: 24px 48px;
     border-radius: 15px 0;
+
+    .custom {
+      margin-top: -12px;
+      margin-bottom: -12px;
+    }
 
     strong {
       text-transform: uppercase;
@@ -549,42 +558,142 @@ input {
       height: 300px;
     }
 
-    .included-services-title {
+    .services-title {
       color: #878ac6;
       margin: 12px 0;
+      text-align: left !important;
+    }
+
+    .offers-list {
+      width: 500px;
     }
 
     .included-services {
-      width: 300px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 50%;
 
       .included-item {
-        width: 100px;
         position: relative;
-        &:not(:last-child):after {
-          content: "+";
+        margin-bottom: 6px;
+        text-align: left;
+        width: 200px;
+
+        span {
+          margin-left: 32px;
+          font-size: 14px;
+        }
+        &:before {
+          content: url("../assets/icons/tick-inside-circle.svg");
           font-size: 24px;
           color: #878ac6;
-          width: 12px;
-          height: 12px;
+          width: 18px;
+          height: 18px;
           position: absolute;
-          right: -6px;
-          top: 6px;
-        }
-
-        .included-item__img {
-          height: 45px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .included-item__desc {
-          font-size: 12px;
-          text-align: center;
-          text-transform: lowercase;
-          color: #878ac6;
+          left: 0;
+          top: -5px;
         }
       }
+    }
+
+    .not-included-services {
+      margin: 0 auto;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .not-included-item {
+        text-align: left;
+        margin-bottom: 6px;
+        position: relative;
+        width: 200px;
+        span {
+          font-size: 14px;
+          margin-left: 32px;
+        }
+
+        &:before {
+          content: url("../assets/icons/multiply1.svg");
+          font-size: 24px;
+          color: #878ac6;
+          width: 18px;
+          height: 18px;
+          position: absolute;
+          left: 0;
+          top: -5px;
+        }
+      }
+    }
+  }
+}
+
+.about-tour {
+  .tour-name {
+    color: #432a49;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  .tour-desc {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .v-form {
+    padding: 24px;
+  }
+
+  .offers-list {
+    flex-direction: column;
+    width: 100% !important;
+  }
+
+  .included-services,
+  .not-included-services {
+    width: 100% !important;
+  }
+
+  .v-parallax__content {
+    h1 {
+      font-size: 24px !important;
+    }
+  }
+
+  .tour-single-title {
+    flex-direction: column;
+
+    div {
+      display: flex;
+
+      .day-number {
+        font-size: 18px !important;
+        margin-left: 8px;
+      }
+    }
+    h3 {
+      font-size: 24px !important;
+      padding-left: 0 !important;
+    }
+  }
+
+  .tour-single-desc {
+    font-size: 14px;
+  }
+
+  .tour-big-content {
+    padding: 12px !important;
+    & > .d-flex {
+      flex-direction: column;
+      padding-left: 24px;
+    }
+
+    & > h1 {
+      font-size: 24px;
+      margin-bottom: 12px !important;
     }
   }
 }
