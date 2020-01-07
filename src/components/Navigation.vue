@@ -71,7 +71,7 @@
         </router-link>
         <router-link
           class="elevation-0"
-          :to="`/golden-chain`"
+          :to="`/gallery`"
           v-scroll-to="'#about'"
           @click.stop="drawer = false"
         >
