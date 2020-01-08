@@ -26,7 +26,9 @@
               <div class="gallery-img">
                 <img :src="item.data.image.url" alt />
               </div>
-              <p class="gallery-title">{{item.data.title[0].text}}</p>
+              <p class="gallery-title" :title="item.data.title[0].text">
+                <v-clamp autoresize :max-lines="1">{{item.data.title[0].text}}</v-clamp>
+              </p>
             </div>
           </v-col>
         </v-row>
@@ -65,6 +67,7 @@
 <script>
 export default {
   inject: ["theme"],
+
   data() {
     return {
       loading: false,

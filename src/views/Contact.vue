@@ -69,6 +69,9 @@
                     />
                   </v-col>
                   <v-col cols="12">
+                    <textarea name="additional-info" :placeholder="$t('inputs.textarea')" required></textarea>
+                  </v-col>
+                  <v-col cols="12">
                     <button class="custom custom-success" type="submit">{{ $t("inputs.sendBtn") }}</button>
                   </v-col>
                 </v-row>

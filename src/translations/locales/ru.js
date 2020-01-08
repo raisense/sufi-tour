@@ -63,6 +63,7 @@ export default {
     emailInput: "ваш адрес электронной почты",
     phoneInput: "ваш номер телефона",
     questionInput: "type your question hereвведите свой вопрос здесь",
+    textarea: "Дополнительная информация",
     sendBtn: "отправить"
   },
 

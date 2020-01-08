@@ -1,6 +1,7 @@
 <template>
   <div class="feedbacks">
     <div class="feedback-header"></div>
+
     <swiper :options="swiperOption">
       <swiper-slide v-for="(item, i) in feedbacks" :key="i">
         <div class="feedback-item">
@@ -86,6 +87,10 @@
   height: auto !important;
   margin-left: auto;
   margin-right: auto;
+
+  .swiper-wrapper {
+    padding-top: 12px !important;
+  }
 }
 
 .swiper-slide {

@@ -8,6 +8,22 @@ import PrismicVue from "prismic-vue";
 import linkResolver from "./link-resolver";
 import { i18n } from "./plugins/i18n.js";
 import VueLodash from "vue-lodash";
+import VClamp from "vue-clamp";
+import VueProgressBar from "vue-progressbar";
+
+const options2 = {
+  color: "#bffaf3",
+  failedColor: "#874b4b",
+  thickness: "5px",
+  transition: {
+    speed: "0.2s",
+    opacity: "0.6s",
+    termination: 300
+  },
+  autoRevert: true,
+  location: "left",
+  inverse: false
+};
 
 const options = { name: "lodash" }; // customize the way you want to call it
 
@@ -19,7 +35,7 @@ const accessToken =
   "MC5YZmYwNUJFQUFDRUFCbmtm.ICt5KHBI77-9CO-_ve-_vVpeN--_ve-_vWDvv71K77-9De-_vTogCe-_ve-_ve-_vXLvv73vv71paw";
 
 Vue.use(SmoothScrollbar);
-
+Vue.use(VueProgressBar, options2);
 Vue.use(VueScrollTo);
 Vue.use(VueLodash, options); // options is optional
 
@@ -44,6 +60,8 @@ Vue.use(PrismicVue, {
   linkResolver,
   apiOptions: { accessToken }
 });
+
+Vue.use(VClamp);
 
 Vue.config.productionTip = true;
 

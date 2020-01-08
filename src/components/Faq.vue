@@ -1,8 +1,7 @@
 <template>
   <div class="faq">
-    <div class="faq-header d-flex justify-space-between align-center mb-8">
-      <h3>F.A.Q</h3>
-      <button class="custom custom-success" @click.stop="dialog = true">{{$t('faq.formTitle')}}</button>
+    <div class="faq-header justify-end d-flex mb-8">
+      <h3 class="section-title" align="right">F.A.Q</h3>
     </div>
     <div class="faq-body">
       <v-expansion-panels :accordion="true" class="elevation-0">
@@ -20,28 +19,6 @@
         <img src="../assets/icons/arrow-point-to-right.svg" alt />
       </router-link>
     </div>
-    <v-dialog v-model="dialog" max-width="500">
-      <v-form>
-        <v-container>
-          <h1>{{$t("faq.formTitle")}}</h1>
-          <p>{{$t("faq.formSubtitle")}}</p>
-          <v-row>
-            <v-col cols="12">
-              <input type="text" name :placeholder="$t('inputs.nameInput')" required />
-            </v-col>
-            <v-col cols="12">
-              <input type="email" name :placeholder="$t('inputs.emailInput')" required />
-            </v-col>
-            <v-col cols="12">
-              <input type="text" name :placeholder="$t('inputs.questionInput')" required />
-            </v-col>
-            <v-col cols="12">
-              <button class="custom custom-success">{{$t('inputs.sendBtn')}}</button>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-form>
-    </v-dialog>
   </div>
 </template>
 
@@ -95,25 +72,5 @@ input {
 
 .v-expansion-panel::before {
   box-shadow: none;
-}
-
-.v-form {
-  background-color: #fff !important;
-  padding: 32px 48px;
-}
-.v-expansion-panel-header {
-  font-weight: normal;
-  font-size: 14px;
-}
-.v-expansion-panel {
-  font-size: 13px;
-  opacity: 0.9;
-  line-height: 20px;
-}
-
-@media screen and (max-width: 576px) {
-  .v-form {
-    padding: 24px;
-  }
 }
 </style>

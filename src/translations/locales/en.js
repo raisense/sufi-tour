@@ -63,6 +63,7 @@ export default {
     emailInput: "your email adress",
     phoneInput: "your phone number",
     questionInput: "type your question here",
+    textarea: "additional info",
     sendBtn: "send"
   },
 

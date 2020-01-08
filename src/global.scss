@@ -126,6 +126,10 @@ input:focus {
   margin-top: 64px;
 }
 
+.v-app-bar.v-app-bar--fixed {
+  position: static;
+}
+
 .faq-footer a {
   margin-top: 20px;
   display: flex;
@@ -134,6 +138,17 @@ input:focus {
   span {
     color: #432a49;
     margin-right: 16px;
+  }
+}
+
+form {
+  textarea {
+    border: 1px solid #ccc;
+    padding: 15px 24px;
+    font-size: 14px;
+    border-radius: 25px 0;
+    width: 80%;
+    min-height: 150px;
   }
 }
 
@@ -242,11 +257,7 @@ input:focus {
   // .theme--dark.v-overlay {
   //   display: none !important;
   // }
-
 }
-
-
-
 
 @media screen and (max-width: 768px) {
   .wrapper {
@@ -256,7 +267,6 @@ input:focus {
 
   .tour-header {
     .row {
-
       flex-direction: column;
     }
   }
@@ -269,7 +279,6 @@ input:focus {
     .tour-single-title {
       font-size: 42px !important;
     }
-
 
     .scroll-area {
       height: auto !important;
@@ -324,10 +333,7 @@ input:focus {
       position: relative !important;
       width: 100%;
     }
-
-
   }
-
 
   .about-item__image img {
     width: 100%;

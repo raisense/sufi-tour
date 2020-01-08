@@ -54,7 +54,7 @@ export default {
 
   footer: {
     social: "Sosyal Ağ",
-    copyright: "© Telif Hakkı 2019 Sufi Tour. Tüm hakları saklıdır.",
+    copyright: "Tüm hakları saklıdır.",
     trademark: "RAISENSE LLC tarafından tasarlanmıştır"
   },
 
@@ -63,6 +63,7 @@ export default {
     emailInput: "e-posta adresiniz",
     phoneInput: "telefon numaranız",
     questionInput: "sorunuzu buraya yazın",
+    textarea: "ilave bilgi",
     sendBtn: "gönder"
   },
 

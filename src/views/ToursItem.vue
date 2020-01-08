@@ -1,7 +1,8 @@
 <template>
   <v-app>
     <div class="tour-inner">
-      <v-parallax height="400" class="tours-parallax" :src="image.url">
+      <!-- <v-parallax height="400" class="tours-parallax" :src="image.url"> -->
+      <v-parallax height="400" class="tours-parallax" src="../assets/bg.jpg">
         <v-row align="center" justify="center">
           <v-col class="text-center" cols="12">
             <h1 class="display-4 font-weight-bold mb-4">{{ name }}</h1>
@@ -10,6 +11,14 @@
           </v-col>
         </v-row>
       </v-parallax>
+      <h1 class="loader text-center" v-if="loading == true">
+        <div class="lds-ellipsis">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </h1>
 
       <!-- <div class="tour-item-about">
         <v-container>
@@ -64,7 +73,7 @@
         </v-container>
       </div>-->
       <v-container>
-        <div class="tour-big-details">
+        <div class="tour-big-details" v-if="loading == false">
           <div class="tour-header">
             <v-row>
               <v-col>
@@ -97,7 +106,9 @@
                 <button
                   class="custom custom-success"
                   @click.stop="dialog = true"
-                >{{ $t("tour_item.btn") }}</button>
+                >
+                  {{ $t("tour_item.btn") }}
+                </button>
               </v-col>
             </v-row>
           </div>
@@ -107,11 +118,11 @@
                 <div class="about-tour">
                   <div class="tour-name">
                     {{
-                    $i18n.locale == "en"
-                    ? "About "
-                    : $i18n.locale == "ru"
-                    ? "О "
-                    : ""
+                      $i18n.locale == "en"
+                        ? "About "
+                        : $i18n.locale == "ru"
+                        ? "О "
+                        : ""
                     }}
                     {{ name }} {{ $i18n.locale == "tr" ? "hakkında" : "" }}
                   </div>
@@ -121,35 +132,64 @@
               <v-col>
                 <div class="d-flex offers-list">
                   <div class="included-services" v-if="included">
-                    <h4 class="services-title">{{ $t("tour_item.header.included.title") }}:</h4>
-                    <div class="included-item" v-for="(item, i) in included" :key="i">
-                      <span>{{item.included_name }}</span>
+                    <h4 class="services-title">
+                      {{ $t("tour_item.header.included.title") }}:
+                    </h4>
+                    <div
+                      class="included-item"
+                      v-for="(item, i) in included"
+                      :key="i"
+                    >
+                      <span>{{ item.included_name }}</span>
                     </div>
                   </div>
                   <div class="not-included-services" v-if="not_included">
-                    <h4 class="services-title">{{ $t("tour_item.header.not_included.title") }}:</h4>
-                    <div class="not-included-item" v-for="(item, i) in not_included" :key="i">
-                      <span>{{item.not_included_name }}</span>
+                    <h4 class="services-title">
+                      {{ $t("tour_item.header.not_included.title") }}:
+                    </h4>
+                    <div
+                      class="not-included-item"
+                      v-for="(item, i) in not_included"
+                      :key="i"
+                    >
+                      <span>{{ item.not_included_name }}</span>
                     </div>
                   </div>
                 </div>
               </v-col>
             </v-row>
 
-            <h1 class="text-center">{{ $t("tour_item.header.roadmap") }}</h1>
+            <h1 class="text-center">
+              <img
+                src="../assets/icons/route.svg"
+                width="32px"
+                style="vertical-align: -5px; "
+                alt
+              />
+              {{ $t("tour_item.header.roadmap") }}
+            </h1>
             <div class="d-flex justify-space-between">
               <div class="arrival">
-                <strong>{{ $t("tour_item.header.arrival") }}:</strong>
+                <strong>
+                  <img src="../assets/icons/departures.svg" width="18px" />
+                  {{ $t("tour_item.header.arrival") }}:
+                </strong>
                 <span>{{ arrival }}</span>
               </div>
               <div class="departure">
-                <strong>{{ $t("tour_item.header.departure") }}:</strong>
+                <strong>
+                  <img src="../assets/icons/arrivals.svg" width="18px" />
+                  {{ $t("tour_item.header.departure") }}:
+                </strong>
                 <span>{{ departure }}</span>
               </div>
             </div>
 
             <div>
-              <swiper :options="swiperOption" class="tour-single-swiper show-on-mobile mt-6">
+              <swiper
+                :options="swiperOption"
+                class="tour-single-swiper show-on-mobile mt-6"
+              >
                 <swiper-slide v-for="(item, i) in slices" :key="i">
                   <v-row>
                     <v-col cols="12">
@@ -160,19 +200,29 @@
                     <v-col cols="12">
                       <div class="tour-single-title d-flex">
                         <div>
-                          <div class="day-label">{{ $t("tour_item.header.day") }}:</div>
-                          <div class="day-number">0{{ item.primary.day_number }}</div>
+                          <div class="day-label">
+                            {{ $t("tour_item.header.day") }}:
+                          </div>
+                          <div class="day-number">
+                            0{{ item.primary.day_number }}
+                          </div>
                         </div>
                         <h3>{{ item.primary.destination_name[0].text }}</h3>
                       </div>
-                      <div class="tour-single-desc">{{ item.primary.description[0].text }}</div>
+                      <div class="tour-single-desc">
+                        {{ item.primary.description[0].text }}
+                      </div>
                     </v-col>
                   </v-row>
                 </swiper-slide>
                 <div class="swiper-button-prev" slot="button-prev"></div>
                 <div class="swiper-button-next" slot="button-next"></div>
               </swiper>
-              <div v-for="(item, i) in slices" :key="i" class="tour-single hide-on-mobile">
+              <div
+                v-for="(item, i) in slices"
+                :key="i"
+                class="tour-single hide-on-mobile"
+              >
                 <v-row>
                   <v-col cols="3">
                     <div class="tour-single-img">
@@ -182,12 +232,18 @@
                   <v-col cols="9">
                     <div class="tour-single-title d-flex">
                       <div>
-                        <div class="day-label">{{ $t("tour_item.header.day") }}:</div>
-                        <div class="day-number">0{{ item.primary.day_number }}</div>
+                        <div class="day-label">
+                          {{ $t("tour_item.header.day") }}:
+                        </div>
+                        <div class="day-number">
+                          0{{ item.primary.day_number }}
+                        </div>
                       </div>
                       <h3>{{ item.primary.destination_name[0].text }}</h3>
                     </div>
-                    <div class="tour-single-desc">{{ item.primary.description[0].text }}</div>
+                    <div class="tour-single-desc">
+                      {{ item.primary.description[0].text }}
+                    </div>
                   </v-col>
                 </v-row>
               </div>
@@ -203,12 +259,27 @@
           <p>{{ $t("tour_item.form.subtitle") }}</p>
           <form action="https://formspree.io/xknondeb" method="post">
             <v-row>
-              <input type="text" style="display: none" name="tour-name" :value="name" />
+              <input
+                type="text"
+                style="display: none"
+                name="tour-name"
+                :value="name"
+              />
               <v-col cols="12">
-                <input type="text" name="name" :placeholder="$t('inputs.nameInput')" required />
+                <input
+                  type="text"
+                  name="name"
+                  :placeholder="$t('inputs.nameInput')"
+                  required
+                />
               </v-col>
               <v-col cols="12">
-                <input type="email" name="email" :placeholder="$t('inputs.emailInput')" required />
+                <input
+                  type="email"
+                  name="email"
+                  :placeholder="$t('inputs.emailInput')"
+                  required
+                />
               </v-col>
               <v-col cols="12">
                 <input
@@ -219,7 +290,9 @@
                 />
               </v-col>
               <v-col cols="12">
-                <button class="custom custom-success" type="submit">{{ $t("inputs.sendBtn") }}</button>
+                <button class="custom custom-success" type="submit">
+                  {{ $t("inputs.sendBtn") }}
+                </button>
               </v-col>
             </v-row>
           </form>
@@ -280,11 +353,12 @@ export default {
     getTour(tour_id) {
       let id = tour_id || this.$route.params.id;
       this.loading = true;
+      console.log(this.loading);
       this.$prismic.client
         .query(this.$prismic.Predicates.at("document.id", id), {
           lang: "*"
         })
-        .then(response => {
+        .then((response) => {
           const data = response.results[0].data;
 
           this.name = data.name[0].text;
@@ -304,11 +378,12 @@ export default {
         });
 
       this.loading = false;
+      console.log(this.loading);
     }
   },
   watch: {
     currentLang(newValue) {
-      this.alternativeLang.map(el => {
+      this.alternativeLang.map((el) => {
         if (el.lang == newValue) {
           this.getTour(el.id);
         }
@@ -451,8 +526,7 @@ input {
 .tour-single {
   .tour-single-img {
     width: 100%;
-    height: 100%;
-    max-height: 300px;
+    height: 200px;
     border-radius: 15px;
     overflow: hidden;
     img {
@@ -479,8 +553,7 @@ input {
 
   .tour-single-img {
     width: 100%;
-    height: 100%;
-    max-height: 300px;
+    height: 200px;
     border-radius: 15px;
     overflow: hidden;
     img {
@@ -567,7 +640,7 @@ input {
 
     .services-title {
       color: #432a49;
-      margin: 12px 0;
+      margin-bottom: 12px;
       text-align: left !important;
     }
 
