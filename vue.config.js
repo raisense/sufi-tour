@@ -1,6 +1,6 @@
 module.exports = {
   transpileDependencies: ["vuetify", "vue-clamp", "resize-detector"],
-  publicPath: "/",
+  publicPath: "/sufi-tour-front/",
   pluginOptions: {
     i18n: {
       locale: "en",
