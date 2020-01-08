@@ -37,7 +37,8 @@ const accessToken =
 Vue.use(SmoothScrollbar);
 Vue.use(VueProgressBar, options2);
 Vue.use(VueScrollTo);
-Vue.use(VueLodash, options); // options is optional
+Vue.use(VueLodash, options);
+Vue.use(VClamp);
 
 // You can also pass in the default options
 Vue.use(VueScrollTo, {
@@ -60,8 +61,6 @@ Vue.use(PrismicVue, {
   linkResolver,
   apiOptions: { accessToken }
 });
-
-Vue.use(VClamp);
 
 Vue.config.productionTip = true;
 

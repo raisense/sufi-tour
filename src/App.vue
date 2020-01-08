@@ -2,7 +2,7 @@
   <v-app>
     <Navigation />
     <router-view></router-view>
-    <!-- <vue-progress-bar></vue-progress-bar> -->
+    <!-- <vue-progress-bar></vue-progress-b ar> -->
     <Footer></Footer>
   </v-app>
 </template>
