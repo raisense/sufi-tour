@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import GoldenChain from "../views/GoldenChain.vue";
 import ToursItem from "../views/ToursItem.vue";
 import store from "../store";
 import { i18n } from "../plugins/i18n.js";
@@ -16,15 +17,9 @@ const routes = [
   {
     path: "/golden-chain",
     name: "golden-chain",
-    component: () =>
-      import(/* webpackChunkName: "golden-chain" */ "../views/GoldenChain.vue")
+    component: GoldenChain
   },
-  // {
-  //   path: "/golden-chain/:id",
-  //   name: "golden-chain-item",
-  //   component: () =>
-  //     import(/* webpackChunkName: "golden-chain" */ "../views/GoldenChain.vue")
-  // },
+
   {
     path: "/tours",
     name: "tours",
@@ -54,7 +49,6 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
   base: process.env.BASE_URL,
   routes,
   scrollBehavior() {
