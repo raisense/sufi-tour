@@ -3,9 +3,7 @@
     <v-parallax height="400" class="tours-parallax" src="../assets/bg-2.png">
       <v-row align="center" justify="center">
         <v-col class="text-center" cols="12">
-          <h1 class="display-1 font-weight-bold mb-4">
-            {{ $t("gallery.title") }}
-          </h1>
+          <h1 class="display-1 font-weight-bold mb-4">{{ $t("gallery.title") }}</h1>
         </v-col>
       </v-row>
     </v-parallax>
@@ -16,33 +14,25 @@
         class="py-0"
       >
         <v-row class="px-3">
-          <v-col cols="12" sm="6" md="3" lg="4" v-for="(item, i) in 3" :key="i">
-            <v-skeleton-loader
-              class
-              max-width="100%"
-              type="card"
-            ></v-skeleton-loader>
+          <v-col cols="12" sm="6" md="3" lg="4" v-for="(item, i) in 6" :key="i">
+            <v-skeleton-loader class max-width="100%" type="card"></v-skeleton-loader>
           </v-col>
         </v-row>
       </v-sheet>
-      <div class="gallery-content">
+      <div class="gallery-content" v-if="loading == false">
         <v-row>
-          <v-col
-            cols="12"
-            sm="6"
-            md="3"
-            lg="4"
-            v-for="(item, i) in gallery"
-            :key="i"
-          >
+          <v-col cols="12" sm="6" md="3" lg="4" v-for="(item, i) in gallery" :key="i">
             <div class="gallery-item">
               <div class="gallery-img">
-                <img :src="item.data.image.url" alt />
+                <img :src="item.data.image.url" v-if="item.data.image.url" alt />
+                <img src="../assets/not-found.png" v-if="!item.data.image.url" alt />
               </div>
               <p class="gallery-title" :title="item.data.title[0].text">
-                <v-clamp autoresize :max-lines="2">{{
-                  item.data.title[0].text
-                }}</v-clamp>
+                <v-clamp autoresize :max-lines="2">
+                  {{
+                  item.data.title[0].text ? item.data.title[0].text : " "
+                  }}
+                </v-clamp>
               </p>
             </div>
           </v-col>
@@ -108,8 +98,9 @@ export default {
         .query(this.$prismic.Predicates.at("document.type", "gallery"), {
           lang: this.currentLang
         })
-        .then((response) => {
+        .then(response => {
           this.gallery = response.results;
+          console.log(this.gallery);
           this.loading = false;
         });
     }

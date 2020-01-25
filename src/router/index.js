@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import GoldenChain from "../views/GoldenChain.vue";
 import ToursItem from "../views/ToursItem.vue";
 import store from "../store";
+import NotFoundComponent from "../views/NotFoundComponent";
 import { i18n } from "../plugins/i18n.js";
 
 Vue.use(VueRouter);
@@ -42,13 +43,12 @@ const routes = [
     name: "contact",
     component: () =>
       import(/* webpackChunkName: "contact" */ "../views/Contact.vue")
-  }
-
-  //   ]
-  // }
+  },
+  { path: "*", component: NotFoundComponent }
 ];
 
 const router = new VueRouter({
+  mode: "history",
   base: process.env.BASE_URL,
   routes,
   scrollBehavior() {

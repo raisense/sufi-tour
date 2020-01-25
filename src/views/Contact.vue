@@ -22,15 +22,15 @@
             <div class="email-info">
               <p>
                 <img src="../assets/icons/global.svg" width="18" alt />
-                <a href="#">www.asiatour.uz</a>
+                <a href="http://asiatour.uz">www.asiatour.uz</a>
               </p>
               <p>
                 <img src="../assets/icons/global.svg" width="18" alt />
-                <a href="#">www.mototour.uz</a>
+                <a href="http://mototour.uz">www.mototour.uz</a>
               </p>
               <p>
                 <img src="../assets/icons/global.svg" width="18" alt />
-                <a href="#">www.mice-tours.uz</a>
+                <a href="http://uzmice.uz">www.uzmice.uz</a>
               </p>
             </div>
             <iframe

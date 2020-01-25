@@ -73,7 +73,6 @@ export default {
         })
         .then(response => {
           this.item = response.results[0];
-          console.log(this.item);
           this.loading = false;
         });
     }

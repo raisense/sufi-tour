@@ -8,14 +8,6 @@
       </v-row>
     </v-parallax>
     <v-container>
-      <h1 class="loader text-center" v-if="loading == true">
-        <div class="lds-ellipsis">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </h1>
       <section class="about-list full-section">
         <nav class="pt-8">
           <ul>
@@ -207,10 +199,7 @@ export default {
           this.aboutItems = response.results;
           this.loading = false;
 
-          if (this.currentItem == null) {
-            this.setItem(this.aboutItems[0].id);
-            console.log(this.currentItem);
-          }
+          this.setItem(this.aboutItems[0].id);
         });
     },
 
@@ -222,7 +211,7 @@ export default {
         })
         .then(response => {
           this.currentDialog = response.results[0];
-          console.log(this.currentDialog);
+
           this.loadingDialog = false;
         });
     },
@@ -236,23 +225,7 @@ export default {
   watch: {
     currentLang(newValue) {
       this.getAbout();
-    },
-    windowWidth(newWidth, oldWidth) {
-      console.log(`it changed to ${newWidth} from ${oldWidth}`);
     }
-  },
-
-  beforeDestroy() {
-    window.removeEventListener("resize", this.onResize);
-  },
-
-  mounted() {
-    this.$nextTick(() => {
-      window.addEventListener("resize", this.onResize);
-    });
-  },
-  onResize() {
-    this.windowWidth = window.innerWidth;
   },
 
   created() {
