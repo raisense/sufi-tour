@@ -7,7 +7,7 @@ export default {
     contact_us: "bize ulaşın"
   },
   heroContent: {
-    title: "SİZİ ARAMAN SİZİ ARIYOR.",
+    title: "SENIN ARADIGIN SENI ARIYOR.",
     subtitle: "ÖZBEKİSTAN'DA GRUP SEYAHATLERİ",
     counters: {
       one: "seyahat",

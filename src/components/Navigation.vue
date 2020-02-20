@@ -21,12 +21,7 @@
               $t("navigation.gallery")
               }}
             </router-link>
-            <router-link
-              class="elevation-0"
-              :to="this.$route == '/' ? '#feedback' : '/'"
-              v-scroll-to="'#feedback'"
-              text
-            >{{ $t("navigation.feedback") }}</router-link>
+            <router-link class="elevation-0" :to="`/tours`" text>{{ $t("navigation.tours") }}</router-link>
             <router-link class="elevation-0" to="contact" text>{{ $t("navigation.contact_us") }}</router-link>
           </v-toolbar-items>
           <v-spacer></v-spacer>

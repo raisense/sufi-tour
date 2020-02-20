@@ -90,7 +90,7 @@
                     {{item.data.duration}}
                   </p>
                 </v-col>
-                <v-col xs="12" sm="3" md="4" lg="4">
+                <v-col xs="12" sm="3" md="4" lg="4" v-if="item.data.price">
                   <p class="price-label">{{$t("tours.price")}}:</p>
                   <p
                     class="price-text"

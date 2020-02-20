@@ -4,6 +4,9 @@
       <v-menu bottom :offset-y="true" left>
         <template v-slot:activator="{ on }">
           <v-btn dark v-on="on" :ripple="false">
+            <img class="lang" v-if="currentLanguage == 'en'" src="../assets/icons/en.svg" alt />
+            <img class="lang" v-if="currentLanguage == 'ru'" src="../assets/icons/ru.svg" alt />
+            <img class="lang" v-if="currentLanguage == 'tr'" src="../assets/icons/tr.svg" alt />
             {{
             currentLanguage == "tr"
             ? "türkçe"
