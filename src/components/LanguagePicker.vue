@@ -7,12 +7,9 @@
             <img class="lang" v-if="currentLanguage == 'en'" src="../assets/icons/en.svg" alt />
             <img class="lang" v-if="currentLanguage == 'ru'" src="../assets/icons/ru.svg" alt />
             <img class="lang" v-if="currentLanguage == 'tr'" src="../assets/icons/tr.svg" alt />
+            <img class="lang" v-if="currentLanguage == 'de'" src="../assets/icons/de.svg" alt />
             {{
-            currentLanguage == "tr"
-            ? "türkçe"
-            : currentLanguage == "en"
-            ? "english"
-            : "русский"
+            getLanguageName(currentLanguage)
             }}
           </v-btn>
         </template>
@@ -27,9 +24,10 @@
             <img class="lang" v-if="lang == 'en'" src="../assets/icons/en.svg" alt />
             <img class="lang" v-if="lang == 'ru'" src="../assets/icons/ru.svg" alt />
             <img class="lang" v-if="lang == 'tr'" src="../assets/icons/tr.svg" alt />
+            <img class="lang" v-if="lang == 'de'" src="../assets/icons/de.svg" alt />
             <v-list-item-title>
               {{
-              lang == "tr" ? "türkçe" : lang == "en" ? "english" : "русский"
+              getLanguageName(lang)
               }}
             </v-list-item-title>
           </v-list-item>
@@ -48,9 +46,10 @@
           <img class="lang" v-if="lang == 'en'" src="../assets/icons/en.svg" alt />
           <img class="lang" v-if="lang == 'ru'" src="../assets/icons/ru.svg" alt />
           <img class="lang" v-if="lang == 'tr'" src="../assets/icons/tr.svg" alt />
+          <img class="lang" v-if="lang == 'de'" src="../assets/icons/de.svg" alt />
           <v-list-item-title>
             {{
-            lang == "tr" ? "türkçe" : lang == "en" ? "english" : "русский"
+            getLanguageName(lang)
             }}
           </v-list-item-title>
         </v-list-item>
@@ -70,18 +69,21 @@ export default {
     currentLanguage() {
       return this.$store.state.language.language || this.$i18n.locale || "en";
     },
+
     getOtherLanguage() {
       switch (this.currentLanguage) {
         case "en":
-          return ["ru", "tr"];
+          return ["ru", "tr", "de"];
         case "ru":
-          return ["en", "tr"];
+          return ["en", "tr", "de"];
         case "tr":
-          return ["en", "ru"];
+          return ["en", "ru", "de"];
+        case "de":
+          return ["en", "ru", "tr"];
       }
     },
     getAllLanguage() {
-      return ["en", "ru", "tr"];
+      return ["en", "ru", "tr", "de"];
     }
   },
   methods: {
@@ -90,6 +92,19 @@ export default {
       this.$store.dispatch("language/setLanguage", lang);
 
       // this.$router.go();
+    },
+
+    getLanguageName(lang) {
+      switch (lang) {
+        case "tr":
+          return "türkçe";
+        case "en":
+          return "english";
+        case "ru":
+          return "русский";
+        case "de":
+          return "deutsche";
+      }
     }
   }
 };

@@ -88,6 +88,8 @@ export default {
     currentLang() {
       if (this.$store.state.language.language == "en") {
         return "en-us";
+      } else if (this.$store.state.language.language == "de") {
+        return "de-de";
       } else return this.$store.state.language.language;
     }
   },
